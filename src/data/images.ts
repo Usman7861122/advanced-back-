@@ -1,16 +1,19 @@
 /**
  * ALL IMAGES LIVE HERE.
- * - `live()`      = real photos from the current advancedback.com (hotlinked for now; download into /public/images before launch).
+ * - `live()`      = real photos from the current advancedback.com. Hotlinked until you run `npm run download-images`,
+ *                   which saves them into /public/images/live and flips LOCAL to true.
  * - `unsplash()`  = TEMPORARY placeholders. Replace each with a Shutterstock image when the plan refreshes.
  *                   Search this file for "SHUTTERSTOCK" to find them.
  */
-const live = (p: string) => `https://advancedback.com/wp-content/uploads/${p}`;
+const LOCAL = false; // `npm run download-images` sets this to true once every file is saved locally
+const VIDEO_LOCAL = false; // set to true by the script too, when the video was downloaded
+const live = (p: string) => (LOCAL ? `/images/live/${p}` : `https://advancedback.com/wp-content/uploads/${p}`);
 export const unsplash = (id: string, w = 1200, h?: number) =>
   `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&q=75&w=${w}${h ? `&h=${h}` : ''}`;
 
 export const img = {
   logo: '/images/logo-e1772010222317.png',
-  heroVideo: 'https://d216ujrdi95jbi.cloudfront.net/Travis+Mckay+(1).m4v',
+  heroVideo: VIDEO_LOCAL ? '/video/hero.m4v' : 'https://d216ujrdi95jbi.cloudfront.net/Travis+Mckay+(1).m4v',
   heroPoster: live('2026/02/2150433205-e1772008394103.jpg'),
 
   // SHUTTERSTOCK: replace these Unsplash placeholders later
