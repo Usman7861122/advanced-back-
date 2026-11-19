@@ -30,5 +30,23 @@
     "2026/09/ChatGPT-Image-Feb-26-2026-09_33_07-PM-e1789553667142.png",
     "2026/11/Winner-Logo-2026.png"
   ],
-  "video": "https://d216ujrdi95jbi.cloudfront.net/Travis+Mckay+(1).m4v"
+  "video": "https://d216ujrdi95jbi.cloudfront.net/Travis+Mckay+(1).m4v",
+  "icons": [
+    {
+      "url": "https://advancedback.com/wp-content/uploads/2026/02/cropped-person_13514019-32x32.png",
+      "out": "public/favicon-32.png"
+    },
+    {
+      "url": "https://advancedback.com/wp-content/uploads/2026/02/cropped-person_13514019-192x192.png",
+      "out": "public/icon-192.png"
+    },
+    {
+      "url": "https://advancedback.com/wp-content/uploads/2026/02/cropped-person_13514019-180x180.png",
+      "out": "public/apple-touch-icon.png"
+    },
+    {
+      "url": "https://advancedback.com/wp-content/uploads/2026/02/cropped-person_13514019.png",
+      "out": "public/icon-512.png"
+    }
+  ]
 }

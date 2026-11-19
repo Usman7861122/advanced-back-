@@ -6,6 +6,7 @@
  *
  * - Images go to  public/images/live/<year>/<month>/<file>
  * - Hero video    public/video/hero.m4v
+ * - Website icons public/favicon-32.png, icon-192.png, apple-touch-icon.png, icon-512.png (always refreshed)
  * - Files that already exist are skipped, so you can re-run it safely.
  * - When everything downloads, it flips `LOCAL = true` in src/data/images.ts.
  *   If anything fails, nothing is flipped and the site keeps using the live URLs.
@@ -28,12 +29,17 @@ const jobs = cfg.images.map((p) => ({
   out: join(root, 'public/images/live', p),
   kind: 'image',
 }));
+// website icons (the runner icon from the live site) always replace the placeholder files
+const iconBase = process.env.LIVE_ICON_BASE;
+for (const ic of cfg.icons || []) {
+  jobs.push({ url: iconBase ? iconBase + ic.url.split('/').pop() : ic.url, out: join(root, ic.out), kind: 'image', force: true });
+}
 if (withVideo) jobs.push({ url: videoUrl, out: join(root, 'public/video/hero.m4v'), kind: 'video' });
 
 const exists = async (f) => !!(await stat(f).catch(() => null));
 
 async function get(job, tries = 3) {
-  if (await exists(job.out)) return { skipped: true };
+  if (!job.force && (await exists(job.out))) return { skipped: true };
   let err;
   for (let i = 1; i <= tries; i++) {
     try {
