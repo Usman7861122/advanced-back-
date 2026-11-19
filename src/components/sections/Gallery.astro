@@ -1,0 +1,12 @@
+---
+import Gallery from '../islands/Gallery';
+import DriftBg from '../ui/DriftBg.astro';
+import { img } from '../../data/images';
+import { site } from '../../data/site';
+---
+<section id="office" class="relative overflow-hidden bg-white py-24 sm:py-28">
+  <DriftBg soft />
+  <div class="relative z-10 mx-auto max-w-7xl px-5">
+    <Gallery client:visible photos={img.office} location={site.location} street={site.street} cityLine={site.cityLine} mapHref={site.mapHref} />
+  </div>
+</section>

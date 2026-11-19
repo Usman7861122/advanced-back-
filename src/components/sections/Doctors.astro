@@ -1,0 +1,55 @@
+---
+import { img } from '../../data/images';
+import { site } from '../../data/site';
+const base = '/about-practice/meet-the-doctors/';
+const doctors = [
+  { n: 'Dr. Travis McKay', role: 'Doctor of Chiropractic', chips: ['Doctor of Chiropractic', 'Spinal alignment'], d: 'Grew up in a chiropractic family and focuses on spinal alignment.', img: img.doctors.travis, href: base + 'dr-travis-mckay/' },
+  { n: 'Dr. Curtis Hollen', role: 'Chiropractor, Palmer College graduate', chips: ['Palmer College', 'Since 2015'], d: 'Treating patients since 2015. Graduated at the top of his class.', img: img.doctors.hollen, href: base + 'dr-curtis-hollen/' },
+  { n: 'Dr. Richard McKay', role: 'Chiropractor', chips: ['Chiropractor'], d: 'Started as a skeptic, then saw the healing benefits of chiropractic firsthand.', img: img.doctors.richard, href: base + 'dr-richard-mckay/' },
+  { n: 'Dr. Zachary Roth', role: 'Chiropractor, Palmer College graduate', chips: ['Palmer College', '10+ years'], d: 'Over ten years of experience, including practice in North Carolina, Texas and Pennsylvania.', img: img.doctors.roth, href: base + 'dr-zachary-roth/' },
+  { n: 'Dr. Daniel Meers', role: 'Chiropractor', chips: ['Chiropractor', '15+ years'], d: 'More than 15 years of experience helping patients move better.', img: img.doctors.meers, href: base + 'dr-daniel-meers/' },
+  { n: 'Dr. Nicholas “Nick” Marini', role: 'Chiropractor', chips: ['Chiropractor', '16+ years'], d: 'More than 16 years of experience in chiropractic care.', img: img.doctors.marini, href: base + 'dr-nicholas-nick-marini/' },
+];
+---
+<section id="doctors" class="relative isolate overflow-hidden bg-abyss px-5 py-28 text-white" style="background-image:radial-gradient(60% 60% at 85% 10%, rgba(36,142,176,.45), transparent 60%), radial-gradient(50% 50% at 10% 100%, rgba(122,207,69,.16), transparent 60%)">
+  <div class="orb -z-10 h-[34rem] w-[34rem] bg-sky/25" style="right:-10rem;top:-8rem;animation:float2 26s ease-in-out infinite alternate"></div>
+  <div class="orb -z-10 h-[30rem] w-[30rem] bg-leaf/15" style="left:-10rem;bottom:-8rem;animation:float1 30s ease-in-out infinite alternate"></div>
+
+  <div class="mx-auto max-w-6xl">
+    <div class="mx-auto mb-16 max-w-2xl text-center">
+      <p class="eyebrow reveal inline-flex items-center justify-center gap-4 !text-leaf"><span class="h-px w-10 bg-leaf/70"></span>Our providers</p>
+      <h2 class="reveal mt-5 font-display text-[clamp(2.6rem,5.5vw,4.6rem)] leading-[1.02] tracking-tight" style="--d:80ms">
+        <span class="font-light">Meet the </span><span class="font-bold italic text-sky">Doctors</span>
+      </h2>
+      <p class="reveal mx-auto mt-5 max-w-xl text-lg leading-relaxed text-white/70" style="--d:160ms">One team of experienced chiropractors, with one goal: getting you out of pain and back to your life.</p>
+    </div>
+
+    <ul class="flex flex-wrap justify-center gap-8">
+      {doctors.map((d, i) => (
+        <li class="reveal flex w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.34rem)]" style={`--d:${(i % 3) * 120}ms`}>
+          <article class="pcard group">
+            <a href={d.href} class="pimg block" aria-label={`View profile of ${d.n}`}>
+              <img src={d.img} alt={d.n} loading="lazy" />
+              <span class="pcorners" aria-hidden="true"></span>
+              <div class="pchips">{d.chips.map((c) => <span class="pchip">{c}</span>)}</div>
+            </a>
+            <div class="flex flex-1 flex-col px-2 pb-2 pt-6">
+              <h3 class="text-[1.35rem] font-medium leading-snug">{d.n}</h3>
+              <p class="mt-1.5 text-[15px] leading-snug text-sky/90">{d.role}</p>
+              <div class="pdivider my-5"></div>
+              <p class="flex-1 text-[15.5px] leading-relaxed text-white/70">{d.d}</p>
+              <div class="mt-6 flex flex-wrap gap-3">
+                <a href={d.href} class="pbtn pbtn-solid">View profile</a>
+                <a href={site.appointment} class="pbtn pbtn-line">Book visit</a>
+              </div>
+            </div>
+          </article>
+        </li>
+      ))}
+    </ul>
+
+    <div class="reveal mt-14 text-center">
+      <a href={base} class="btn btn-ghost text-white">Meet the full team <span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>

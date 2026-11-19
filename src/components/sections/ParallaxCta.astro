@@ -1,0 +1,19 @@
+---
+import DriftBg from '../ui/DriftBg.astro';
+import { img } from '../../data/images';
+import { site } from '../../data/site';
+---
+<section class="fixed-window relative isolate flex min-h-screen items-center justify-center overflow-hidden" style={`background-image:url(${img.athlete})`}>
+  <div class="absolute inset-0 bg-gradient-to-b from-abyss/70 via-abyss/45 to-abyss/80"></div>
+  <DriftBg soft class="mix-blend-screen" />
+  <div class="relative z-10 mx-auto max-w-5xl px-5 text-center text-white">
+    <p class="eyebrow reveal !text-leaf">Keep moving</p>
+    <h2 class="reveal mt-5 font-display text-[clamp(3rem,9vw,8rem)] font-semibold leading-[0.92] tracking-tight" style="--d:100ms">
+      Don’t Let Pain<br /><span class="italic text-sky">Control Your Life.</span>
+    </h2>
+    <p class="reveal mx-auto mt-7 max-w-xl text-lg text-white/85" style="--d:220ms">Get back to the runs, the games and the everyday moments you love.</p>
+    <div class="reveal mt-10" style="--d:340ms">
+      <a href={site.appointment} class="btn-appt on-dark"><span>Request Appointment</span><span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>

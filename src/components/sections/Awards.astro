@@ -1,0 +1,21 @@
+---
+import { img } from '../../data/images';
+const row = [...img.awards, ...img.awards];
+---
+<section class="relative overflow-hidden bg-white py-24">
+  <div class="mx-auto max-w-4xl px-5 text-center">
+    <p class="eyebrow reveal">Awards</p>
+    <h2 class="h-display reveal mt-4" style="--d:80ms">Best Chiropractor in Delaware</h2>
+    <p class="lead reveal mx-auto mt-5 max-w-2xl" style="--d:160ms">Our patients have voted us the best for more than a decade. Thank you for trusting us with your care.</p>
+  </div>
+
+  <div class="relative mt-14 [mask-image:linear-gradient(90deg,transparent,#000_10%,#000_90%,transparent)]">
+    <div class="marquee gap-6 px-3" style="--t:38s">
+      {row.map((src) => (
+        <div class="grid h-44 w-44 shrink-0 place-items-center rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition duration-300 hover:-translate-y-2 hover:border-brand/40 hover:shadow-xl hover:shadow-brand/15 sm:h-52 sm:w-52">
+          <img src={src} alt="Award badge" class="max-h-full max-w-full object-contain" loading="lazy" />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

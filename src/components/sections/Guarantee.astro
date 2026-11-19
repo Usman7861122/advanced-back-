@@ -1,0 +1,30 @@
+---
+import DriftBg from '../ui/DriftBg.astro';
+---
+<section class="relative overflow-hidden bg-gradient-to-br from-brand via-deep to-abyss py-24 text-white sm:py-32">
+  <DriftBg />
+  <div class="relative z-10 mx-auto grid max-w-6xl items-center gap-14 px-5 md:grid-cols-[1fr_auto]">
+    <div>
+      <p class="eyebrow reveal !text-leaf">Our promise</p>
+      <h2 class="h-display reveal mt-4" style="--d:80ms">The ABNP <span class="italic text-leaf">Guarantee</span></h2>
+      <p class="reveal mt-6 max-w-xl text-xl leading-relaxed text-white/90" style="--d:160ms">
+        If you are not satisfied, your office visit is free. We stand behind our care, because we want you to feel better and feel good about choosing us.
+      </p>
+      <a href="/resources/patient-center/our-guarantee/" class="btn btn-ghost reveal mt-9 text-white" style="--d:260ms">Learn More <span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+
+    <div class="reveal relative mx-auto grid h-64 w-64 place-items-center sm:h-80 sm:w-80" style="--d:200ms">
+      <span class="absolute inset-0 rounded-full border border-white/30" style="animation:pulse-ring 3.4s ease-out infinite"></span>
+      <svg viewBox="0 0 200 200" class="absolute inset-0 h-full w-full" style="animation:spin-slow 40s linear infinite" aria-hidden="true">
+        <defs><path id="ring" d="M100,100 m-82,0 a82,82 0 1,1 164,0 a82,82 0 1,1 -164,0" /></defs>
+        <text font-family="Roboto Slab" font-size="12.5" letter-spacing="5" fill="#ffffff" fill-opacity=".85"><textPath href="#ring">THE ABNP GUARANTEE · SATISFACTION OR YOUR VISIT IS FREE · </textPath></text>
+      </svg>
+      <div class="relative grid h-36 w-36 place-items-center rounded-full bg-white text-center text-abyss shadow-2xl sm:h-44 sm:w-44">
+        <div>
+          <div class="font-display text-5xl font-semibold leading-none text-brand sm:text-6xl">Free</div>
+          <div class="mt-1 text-xs font-bold uppercase tracking-widest">if not satisfied</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,47 @@
+---
+import AnimatedHero from '../islands/AnimatedHero';
+import { img } from '../../data/images';
+
+const facts = [
+  { k: '1986', v: 'Serving patients since' },
+  { k: '10+ yrs', v: 'Best Chiropractor in Delaware' },
+  { k: 'Newark, DE', v: 'Inside the Omega Professional Center' },
+];
+---
+<section class="relative isolate overflow-hidden bg-gradient-to-br from-abyss via-deep to-abyss">
+  <video
+    id="hero-video"
+    class="absolute inset-0 -z-20 h-full w-full object-cover"
+    style="opacity:0;transition:opacity 1.4s ease"
+    autoplay muted loop playsinline preload="auto" disablepictureinpicture
+    aria-hidden="true"
+  >
+    <source src={img.heroVideo} type="video/mp4" />
+  </video>
+  <div class="absolute inset-0 -z-10 bg-abyss/40"></div>
+  <div class="absolute inset-x-0 bottom-0 -z-10 h-40 bg-gradient-to-t from-abyss/70 to-transparent"></div>
+
+  <AnimatedHero client:load />
+
+  <div class="absolute inset-x-0 bottom-0 z-10">
+    <div class="mx-auto grid max-w-7xl gap-3 px-5 pb-6 sm:grid-cols-3">
+      {facts.map((f, i) => (
+        <div class="reveal rounded-2xl border border-white/15 bg-white/10 px-5 py-4 text-white backdrop-blur-md transition hover:-translate-y-1 hover:bg-white/15" style={`--d:${900 + i * 120}ms`}>
+          <div class="font-display text-3xl font-semibold text-sky">{f.k}</div>
+          <div class="text-sm text-white/80">{f.v}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  (function () {
+    var v = document.getElementById('hero-video');
+    if (!v) return;
+    var show = function () { v.style.opacity = '1'; };
+    v.addEventListener('playing', show);
+    v.addEventListener('canplay', function () { v.play().catch(function () {}); });
+    if (v.readyState > 2) { show(); v.play().catch(function () {}); }
+  })();
+</script>

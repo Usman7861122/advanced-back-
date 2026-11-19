@@ -1,0 +1,40 @@
+---
+import DriftBg from './DriftBg.astro';
+import { img } from '../../data/images';
+import { nav, site } from '../../data/site';
+---
+<footer class="relative overflow-hidden bg-abyss text-white">
+  <DriftBg soft />
+  <div class="relative z-10 mx-auto grid max-w-7xl gap-12 px-5 py-20 md:grid-cols-[1.3fr_1fr_1.2fr]">
+    <div>
+      <a href="/" class="inline-block rounded-2xl bg-white p-3"><img src={img.logo} alt={site.name} class="h-14 w-auto" loading="lazy" /></a>
+      <p class="mt-6 max-w-sm leading-relaxed text-white/75">Providing expert, patient-centered chiropractic care in Newark, Delaware, focused on relieving pain, restoring mobility, and improving long-term spinal health.</p>
+      <a href={site.appointment} class="btn-appt on-dark mt-8"><span>Request Appointment</span></a>
+    </div>
+
+    <nav aria-label="Footer">
+      <h3 class="eyebrow !text-leaf">Explore</h3>
+      <ul class="mt-5 space-y-3">
+        {nav.map((n) => (<li><a href={n.href} class="text-white/80 transition hover:pl-1 hover:text-sky">{n.label}</a></li>))}
+      </ul>
+    </nav>
+
+    <div>
+      <h3 class="eyebrow !text-leaf">Visit us</h3>
+      <dl class="mt-5 space-y-5">
+        <div>
+          <dt class="text-xl font-medium text-white">{site.location}</dt>
+          <dd><a href={site.mapHref} target="_blank" rel="noreferrer" class="block text-[17px] leading-relaxed text-white/55 transition hover:text-sky">{site.street}<br />{site.cityLine}</a></dd>
+        </div>
+        <div><dt class="text-sm text-white/55">Phone</dt><dd><a href={site.phoneHref} class="text-xl font-semibold hover:text-sky">{site.phone}</a></dd></div>
+        <div><dt class="text-sm text-white/55">Fax</dt><dd>{site.fax}</dd></div>
+      </dl>
+    </div>
+  </div>
+  <div class="relative z-10 border-t border-white/10">
+    <div class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-5 py-6 text-sm text-white/60">
+      <p>© {new Date().getFullYear()} {site.name}. All Rights Reserved.</p>
+      <p class="flex gap-5"><a href="/terms-conditions/" class="hover:text-white">Terms &amp; Conditions</a><a href="/privacy-policy/" class="hover:text-white">Privacy Policy</a></p>
+    </div>
+  </div>
+</footer>

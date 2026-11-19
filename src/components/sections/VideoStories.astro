@@ -1,0 +1,28 @@
+---
+import VideoStories from '../islands/VideoStories';
+import DriftBg from '../ui/DriftBg.astro';
+
+const videos = [
+  { id: '5qszrK7xcnQ', title: 'Herniated Disc Pain Improved!' },
+  { id: 'HPWs8M_U_L0', title: 'Patient story' },
+  { id: 'u05YqdsJKWc', title: 'Patient story' },
+  { id: 'RzlI84F9rXs', title: 'Patient story' },
+  { id: 'jg97FXEzVPA', title: 'Patient story' },
+  { id: 'HoOPzcrdS_k', title: 'Patient story' },
+  { id: 'i6bTKEJIRsY', title: 'Patient story' },
+  { id: 'aO8uLRbMt3Y', title: 'Patient story' },
+];
+---
+<section id="video-testimonials" class="relative overflow-hidden bg-deep py-24 text-white sm:py-32">
+  <DriftBg />
+  <div class="relative z-10 mx-auto max-w-7xl px-5">
+    <div class="mb-12 flex flex-wrap items-end justify-between gap-6">
+      <div class="max-w-2xl">
+        <p class="eyebrow reveal !text-leaf">Video testimonials</p>
+        <h2 class="h-display reveal mt-4" style="--d:80ms">Hear it from our patients</h2>
+      </div>
+      <a href="/testimonials/video-testimonials/" class="btn btn-ghost reveal text-white" style="--d:160ms">Learn More <span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+    <VideoStories client:visible videos={videos} />
+  </div>
+</section>

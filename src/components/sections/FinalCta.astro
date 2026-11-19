@@ -1,0 +1,21 @@
+---
+import DriftBg from '../ui/DriftBg.astro';
+import { img } from '../../data/images';
+import { site } from '../../data/site';
+---
+<section class="relative isolate flex min-h-[90vh] items-center overflow-hidden bg-abyss">
+  <img src={img.ctaBig} alt="" class="absolute inset-0 -z-20 h-full w-full object-cover" style="animation:slow-zoom 24s ease-in-out infinite alternate" loading="lazy" />
+  <div class="absolute inset-0 -z-10 bg-gradient-to-r from-abyss/92 via-abyss/70 to-abyss/25"></div>
+  <DriftBg soft class="mix-blend-screen -z-10" />
+  <div class="mx-auto w-full max-w-7xl px-5 py-24 text-white">
+    <p class="eyebrow reveal !text-leaf">Your first step</p>
+    <h2 class="reveal mt-5 max-w-4xl font-display text-[clamp(2.8rem,7vw,6.2rem)] font-semibold leading-[0.95] tracking-tight" style="--d:100ms">
+      Start Your Journey to Becoming <span class="italic text-sky">Pain Free</span> Today
+    </h2>
+    <p class="reveal mt-7 max-w-xl text-lg text-white/85" style="--d:220ms">Whether you’re dealing with back pain, neck pain or chronic discomfort, we’re ready to help.</p>
+    <div class="reveal mt-10 flex flex-wrap gap-4" style="--d:340ms">
+      <a href={site.appointment} class="btn-appt on-dark"><span>Request Appointment</span><span class="arrow" aria-hidden="true">→</span></a>
+      <a href={site.phoneHref} class="btn btn-ghost text-white">Call {site.phone}</a>
+    </div>
+  </div>
+</section>

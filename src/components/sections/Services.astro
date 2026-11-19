@@ -1,0 +1,51 @@
+---
+import DriftBg from '../ui/DriftBg.astro';
+import { img } from '../../data/images';
+const services = [
+  { t: 'Back Pain', d: 'Targeted adjustments and a care plan built around what is causing your back pain.', img: img.svc.back, href: '/services/back-pain-chiropractor-in-newark-de/' },
+  { t: 'Neck Pain', d: 'Focused care for stiff, sore necks from posture, desk work or injury.', img: img.svc.neck, href: '/services/chiropractor-for-neck-pain/' },
+  { t: 'Sciatica', d: 'Care for pain that runs from your lower back through the hip and down the leg.', img: img.svc.sciatica, href: '/services/chiropractor-for-sciatica-in-newark-de/' },
+  { t: 'Herniated Disc', d: 'Non-surgical options for disc pain, matched to what your exam shows.', img: img.svc.disc, href: '/services/herniated-disc-chiropractor-in-newark-de/' },
+  { t: 'Headaches & Migraines', d: 'We check the neck and spine as a possible source of frequent headaches.', img: img.svc.headache, href: '/services/chiropractor-for-headaches-migraines-in-newark-de/' },
+  { t: 'Car Accident', d: 'A careful evaluation and care after a crash for neck, back and joint pain.', img: img.svc.car, href: '/services/car-accident-chiropractor/' },
+];
+---
+<section id="services" class="relative overflow-hidden bg-mist py-24 sm:py-32">
+  <DriftBg soft />
+  <div class="relative z-10 mx-auto max-w-7xl px-5">
+    <div class="flex flex-wrap items-end justify-between gap-6">
+      <div class="max-w-2xl">
+        <p class="eyebrow reveal">Services we offer</p>
+        <h2 class="h-display reveal mt-4" style="--d:80ms">Non-surgical relief for back, neck and joint pain</h2>
+      </div>
+      <a href="/services/" class="btn btn-ghost reveal text-abyss hover:!bg-abyss hover:!text-white" style="--d:160ms">View all services <span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+
+    <div class="mt-14 grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
+      {services.map((s, i) => (
+        <div class="flip reveal" style={`--d:${i * 90}ms`}>
+          <div class="flip-inner">
+            <div class="flip-face shadow-xl shadow-abyss/10">
+              <img src={s.img} alt={`${s.t} care`} class="h-full w-full object-cover" loading="lazy" />
+              <div class="absolute inset-0 bg-gradient-to-t from-abyss/90 via-abyss/20 to-transparent"></div>
+              <div class="absolute inset-x-0 bottom-0 flex items-end justify-between p-6 text-white">
+                <h3 class="font-display text-4xl font-semibold leading-none">{s.t}</h3>
+                <span class="grid h-10 w-10 place-items-center rounded-full bg-white/20 backdrop-blur" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 12a9 9 0 0 1 15-6.7L21 8M21 3v5h-5M21 12a9 9 0 0 1-15 6.7L3 16M3 21v-5h5" /></svg>
+                </span>
+              </div>
+            </div>
+            <div class="flip-face flip-back flex flex-col justify-between bg-gradient-to-br from-deep via-abyss to-deep p-8 text-white shadow-xl shadow-abyss/20">
+              <div class="drift soft"><i></i><i></i><i></i></div>
+              <div class="relative z-10">
+                <h3 class="font-display text-4xl font-semibold text-sky">{s.t}</h3>
+                <p class="mt-4 text-[17px] leading-relaxed text-white/85">{s.d}</p>
+              </div>
+              <a href={s.href} class="btn btn-solid relative z-10 w-fit !bg-white !text-abyss hover:!bg-sky hover:!text-white">Read More <span class="arrow" aria-hidden="true">→</span></a>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

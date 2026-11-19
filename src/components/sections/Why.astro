@@ -1,0 +1,45 @@
+---
+import DriftBg from '../ui/DriftBg.astro';
+import { img } from '../../data/images';
+const reasons = [
+  { t: 'Serving Newark since 1986', d: 'Decades of care from inside the Omega Professional Center.', i: 'M12 8v4l3 2M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z' },
+  { t: 'Best Chiropractor in Delaware', d: 'Named Best Chiropractor in Delaware for more than a decade.', i: 'M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z' },
+  { t: 'We treat the cause', d: 'Personal care plans that look for the root of your pain, not only the symptoms.', i: 'M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10Z' },
+  { t: 'Non-surgical solutions', d: 'Real options for back, neck and joint pain without surgery.', i: 'M5 12l4 4L19 6' },
+];
+---
+<section id="why" class="relative overflow-hidden bg-white py-24 sm:py-32">
+  <DriftBg soft />
+  <div class="relative z-10 mx-auto grid max-w-7xl items-center gap-16 px-5 lg:grid-cols-2">
+    <div>
+      <p class="eyebrow reveal">Why choose us</p>
+      <h2 class="h-display reveal mt-4" style="--d:80ms">Advanced Back &amp; Neck Pain Center</h2>
+      <p class="lead reveal mt-6 max-w-xl" style="--d:160ms">
+        Chiropractors in Newark, DE. We have served patients since 1986 from our office inside the Omega Professional Center, with care built around you.
+      </p>
+
+      <div class="mt-10 grid gap-4 sm:grid-cols-2">
+        {reasons.map((r, i) => (
+          <div class="reveal group rounded-2xl border border-slate-200 bg-white/80 p-6 backdrop-blur transition duration-300 hover:-translate-y-1.5 hover:border-brand/40 hover:shadow-xl hover:shadow-brand/10" style={`--d:${240 + i * 100}ms`}>
+            <span class="grid h-11 w-11 place-items-center rounded-xl bg-mist text-brand transition group-hover:bg-brand group-hover:text-white">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={r.i} /></svg>
+            </span>
+            <h3 class="mt-4 text-lg font-bold">{r.t}</h3>
+            <p class="mt-1.5 text-[15px] leading-relaxed text-slate-600">{r.d}</p>
+          </div>
+        ))}
+      </div>
+
+      <a href="/about-practice/" class="btn btn-solid reveal mt-10" style="--d:700ms">Learn More <span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+
+    <div class="reveal relative" style="--d:200ms">
+      <div class="absolute -inset-4 -z-10 rounded-[2rem] bg-gradient-to-br from-sky/30 to-leaf/30 blur-2xl"></div>
+      <img src={img.whyUs} alt="Inside the Advanced Back & Neck Pain Center office" class="sq shadow-2xl shadow-abyss/20" loading="lazy" />
+      <div class="absolute -bottom-6 -left-4 rounded-2xl bg-abyss px-6 py-5 text-white shadow-2xl sm:-left-8">
+        <div class="font-display text-5xl font-semibold text-sky">1986</div>
+        <div class="text-sm text-white/80">Helping Newark move better</div>
+      </div>
+    </div>
+  </div>
+</section>
