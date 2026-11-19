@@ -5,8 +5,8 @@
  * - `unsplash()`  = TEMPORARY placeholders. Replace each with a Shutterstock image when the plan refreshes.
  *                   Search this file for "SHUTTERSTOCK" to find them.
  */
-const LOCAL = false; // `npm run download-images` sets this to true once every file is saved locally
-const VIDEO_LOCAL = false; // set to true by the script too, when the video was downloaded
+const LOCAL = true; // `npm run download-images` sets this to true once every file is saved locally
+const VIDEO_LOCAL = true; // set to true by the script too, when the video was downloaded
 const live = (p: string) => (LOCAL ? `/images/live/${p}` : `https://advancedback.com/wp-content/uploads/${p}`);
 export const unsplash = (id: string, w = 1200, h?: number) =>
   `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&q=75&w=${w}${h ? `&h=${h}` : ''}`;
