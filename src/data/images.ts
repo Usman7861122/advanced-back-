@@ -40,9 +40,7 @@ export const img = {
   // real photos from the live site
   doctors: {
     travis: live('2026/02/ChatGPT-Image-Feb-26-2026-09_11_17-PM.png'),
-    hollen: live('2026/02/ChatGPT-Image-Feb-26-2026-09_19_34-PM.png'),
     richard: live('2026/03/Smiling-doctor-in-professional-attire.png'),
-    roth: live('2026/02/ChatGPT-Image-Feb-26-2026-09_33_07-PM.png'),
     meers: live('2026/06/Daniel-Meers-Headshot-scaled-e1782158670970-1.jpg'),
     marini: live('2026/09/ChatGPT-Image-Feb-26-2026-09_33_07-PM-e1789553667142.png'),
   },
