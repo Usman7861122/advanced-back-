@@ -1,0 +1,23 @@
+---
+import PageLayout from '../../../layouts/PageLayout.astro';
+import LocalSection from '../../../components/pages/LocalSection.astro';
+import Doctors from '../../../components/sections/Doctors.astro';
+import Reviews from '../../../components/sections/Reviews.astro';
+import FinalCta from '../../../components/sections/FinalCta.astro';
+import { img } from '../../../data/images';
+---
+<PageLayout
+  title="Meet Our Specialized Chiropractors | Advanced Back & Neck Pain Center"
+  heading="Meet the Doctors"
+  eyebrow="Chiropractors in Newark, DE"
+  lede="Get to know our licensed, experienced chiropractors. Each one is here to help you move better and stay that way."
+  description="Get to know our licensed, highly experienced corrective chiropractors dedicated to restoring your joint alignment, long-term mobility, and nervous system health."
+  image={img.doctorHero}
+  imageAlt="A chiropractor talking with a patient about their care"
+  crumbs={[{ label: 'About Practice', href: '/about-practice/' }, { label: 'Meet the Doctors' }]}
+>
+  <Doctors index />
+  <LocalSection topic="Chiropractors" />
+  <Reviews />
+  <FinalCta />
+</PageLayout>
