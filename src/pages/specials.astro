@@ -1,0 +1,51 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import FinalCta from '../components/sections/FinalCta.astro';
+import { img } from '../data/images';
+import { site } from '../data/site';
+const places = ['Newark', 'Wilmington', 'Pike Creek', 'Elkton'];
+const steps = [
+  { t: 'Call or book online', d: 'Call 302-368-1300 or pick a time on our booking page.' },
+  { t: 'Mention the New Patient Special', d: 'Tell our team when you book so we can set it up.' },
+  { t: 'Meet the doctor', d: 'Your consultation is free and there is no obligation.' },
+];
+---
+<PageLayout
+  title="Promotional Wellness Offers | Advanced Back & Neck Pain Center"
+  heading="Specials"
+  eyebrow="Offers"
+  lede="New to chiropractic, or new to our office? Start with a complimentary consultation."
+  description="Learn how you can save on your next visit. View our ongoing clinic promotions, specialized evaluation discounts, and community wellness packages."
+  image={img.aboutHero}
+  imageAlt="The team at Advanced Back & Neck Pain Center"
+  position="center 35%"
+  crumbs={[{ label: 'Specials' }]}
+>
+  <Fragment slot="actions">
+    <a href={site.appointment} class="btn btn-appt on-dark">Book online</a>
+    <a href={site.phoneHref} class="btn btn-ghost text-white">Call {site.phone}</a>
+  </Fragment>
+
+  <section class="bg-white py-20 sm:py-24">
+    <div class="mx-auto grid max-w-7xl gap-12 px-5 lg:grid-cols-[.8fr_1.2fr] lg:gap-16">
+      <div class="lg:sticky lg:top-28 lg:self-start">
+        <p class="eyebrow reveal">New Patient Special</p>
+        <h2 class="h-display reveal mt-4" style="--d:80ms">A complimentary consultation</h2>
+      </div>
+      <div>
+        <p class="lead reveal mb-5">If you are new to chiropractic or new to our office, we invite you to a no-charge, no-obligation consultation. You meet the doctor, tell us about your pain, and learn if chiropractic care is right for you.</p>
+        <p class="lead reveal mb-8">We welcome patients from {places.join(', ')} and nearby towns. Only a limited number of these offers can be honored in a certain time period, so book early.</p>
+        <ol class="grid gap-4 sm:grid-cols-3">
+          {steps.map((s, i) => (
+            <li class="reveal rounded-2xl border border-slate-200 bg-mist p-6 transition duration-300 hover:-translate-y-1.5 hover:border-brand/40 hover:shadow-xl hover:shadow-brand/15" style={`--d:${i * 90}ms`}>
+              <span class="grid h-9 w-9 place-items-center rounded-full bg-brand font-bold text-white">{i + 1}</span>
+              <h3 class="mt-4 font-display text-xl font-semibold text-ink">{s.t}</h3>
+              <p class="mt-2 text-slate-600">{s.d}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </section>
+  <FinalCta />
+</PageLayout>

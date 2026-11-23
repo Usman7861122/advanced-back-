@@ -1,0 +1,67 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import FinalCta from '../components/sections/FinalCta.astro';
+import { posts, getPost } from '../data/posts';
+import { site } from '../data/site';
+
+export function getStaticPaths() {
+  return posts.map((p) => ({ params: { post: p.slug } }));
+}
+const post = getPost(Astro.params.post as string)!;
+const fmt = (d: string) => new Date(d + 'T12:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+const more = posts.filter((p) => p.slug !== post.slug).slice(0, 3);
+const short = post.title.length > 48 ? post.title.slice(0, 48).replace(/\s+\S*$/, '') + '…' : post.title;
+---
+<PageLayout
+  title={`${post.title} | Advanced Back & Neck Pain Center`}
+  heading={post.title}
+  eyebrow={fmt(post.date)}
+  lede={`${post.minutes} min read`}
+  description={post.excerpt}
+  image={post.image}
+  imageAlt={post.imageAlt}
+  position="center"
+  crumbs={[{ label: 'Blog', href: '/blog/' }, { label: short }]}
+>
+  <article class="bg-white py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-5">
+      <div class:list={['mb-10 overflow-hidden rounded-2xl', post.contain ? 'bg-mist p-6' : '']}>
+        <img src={post.image} alt={post.imageAlt} class:list={['mx-auto w-full', post.contain ? 'max-h-[28rem] object-contain' : 'rounded-2xl']} />
+      </div>
+      <div class="post-body" set:html={post.html} />
+      <div class="mt-12 flex flex-wrap gap-3 rounded-2xl border border-slate-200 bg-mist p-6">
+        <a href={site.appointment} class="btn btn-solid">Book an appointment</a>
+        <a href={site.phoneHref} class="btn btn-ghost">Call {site.phone}</a>
+      </div>
+    </div>
+  </article>
+
+  <section class="bg-mist py-16 sm:py-20">
+    <div class="mx-auto max-w-7xl px-5">
+      <h2 class="h-display">More articles</h2>
+      <div class="mt-8 grid gap-6 md:grid-cols-3">
+        {more.map((p) => (
+          <a href={`/${p.slug}/`} class="group rounded-2xl border border-slate-200 bg-white p-6 transition duration-300 hover:-translate-y-1.5 hover:border-brand/40 hover:shadow-xl hover:shadow-brand/15">
+            <p class="text-sm font-semibold text-brand">{fmt(p.date)}</p>
+            <h3 class="mt-2 font-display text-lg font-semibold leading-snug text-ink">{p.title}</h3>
+            <span class="mt-4 inline-block font-bold text-brand">Read article →</span>
+          </a>
+        ))}
+      </div>
+      <p class="mt-8"><a href="/blog/" class="btn btn-ghost">All articles</a></p>
+    </div>
+  </section>
+  <FinalCta />
+</PageLayout>
+
+<style is:global>
+  .post-body { font-size: 1.125rem; line-height: 1.8; color: #334155; }
+  .post-body p { margin-top: 1.1rem; }
+  .post-body h2 { margin-top: 2.5rem; font-family: var(--font-display, inherit); font-size: 1.85rem; font-weight: 600; line-height: 1.2; color: #0b1f2a; }
+  .post-body h3 { margin-top: 1.8rem; font-size: 1.3rem; font-weight: 700; color: #0b1f2a; }
+  .post-body ul, .post-body ol { margin-top: 1rem; padding-left: 1.4rem; list-style: disc; }
+  .post-body ol { list-style: decimal; }
+  .post-body li { margin-top: .45rem; padding-left: .25rem; }
+  .post-body a { color: #248eb0; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+  .post-body hr { margin: 2rem 0; border-color: #e2e8f0; }
+</style>

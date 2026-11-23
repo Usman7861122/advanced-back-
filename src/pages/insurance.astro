@@ -1,0 +1,35 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import FinalCta from '../components/sections/FinalCta.astro';
+import { img } from '../data/images';
+import { site } from '../data/site';
+---
+<PageLayout
+  title="Accepted Insurance Plans | Advanced Back & Neck Pain Center"
+  heading="Insurance"
+  eyebrow="Billing"
+  lede="We accept most major insurance plans. Here are some of the plans we work with."
+  description="View our comprehensive list of accepted healthcare providers, major medical networks, and personal injury protection (PIP) coverage rules for seamless billing."
+  image={img.aboutHero}
+  imageAlt="The team at Advanced Back & Neck Pain Center"
+  position="center 35%"
+  crumbs={[{ label: 'Insurance' }]}
+>
+  <section class="bg-white py-20 sm:py-24">
+    <div class="mx-auto max-w-6xl px-5">
+      <div class="mx-auto max-w-2xl text-center">
+        <p class="eyebrow reveal">Accepted Insurances</p>
+        <h2 class="h-display reveal mt-4" style="--d:80ms">Plans we accept</h2>
+        <p class="lead reveal mt-5" style="--d:160ms">Please contact our office if you do not see your insurance provider listed. Call <a href={site.phoneHref} class="font-bold text-brand underline-offset-4 hover:underline">{site.phone}</a> and our team will help you confirm your coverage.</p>
+      </div>
+      <div class="mt-14 grid grid-cols-2 gap-5 sm:grid-cols-4">
+        {img.insurance.map((src, i) => (
+          <div class="reveal group grid aspect-square place-items-center rounded-2xl border border-slate-200 bg-white p-7 transition duration-300 hover:-translate-y-2 hover:border-brand/40 hover:shadow-xl hover:shadow-brand/15" style={`--d:${(i % 4) * 90}ms`}>
+            <img src={src} alt="Accepted insurance provider logo" class="max-h-full max-w-full object-contain grayscale transition duration-500 group-hover:grayscale-0" loading="lazy" />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+  <FinalCta />
+</PageLayout>
