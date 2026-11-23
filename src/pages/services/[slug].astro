@@ -1,0 +1,160 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import LocalSection from '../../components/pages/LocalSection.astro';
+import Reviews from '../../components/sections/Reviews.astro';
+import FinalCta from '../../components/sections/FinalCta.astro';
+import { services } from '../../data/services';
+import { site } from '../../data/site';
+
+export function getStaticPaths() {
+  return services.map((s) => ({ params: { slug: s.slug }, props: { s } }));
+}
+const { s } = Astro.props;
+const others = [
+  { t: 'Back Pain', href: '/services/back-pain-chiropractor-in-newark-de/' },
+  { t: 'Neck Pain', href: '/services/chiropractor-for-neck-pain/' },
+  { t: 'Sciatica', href: '/services/chiropractor-for-sciatica-in-newark-de/' },
+  { t: 'Herniated Disc', href: '/services/herniated-disc-chiropractor-in-newark-de/' },
+  { t: 'Headaches & Migraines', href: '/services/chiropractor-for-headaches-migraines-in-newark-de/' },
+  { t: 'Car Accident', href: '/services/car-accident-chiropractor/' },
+].filter((o) => !o.href.includes(s.slug));
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: s.faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a.join(' ') } })),
+};
+---
+<PageLayout
+  title={s.seoTitle}
+  heading={s.title}
+  eyebrow={s.eyebrow}
+  lede={s.lede}
+  description={s.description}
+  image={s.photos[0]}
+  imageAlt={s.photoAlts[0]}
+  crumbs={[{ label: 'Services', href: '/services/' }, { label: s.name }]}
+>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqLd)} />
+  <Fragment slot="actions">
+    <a href={site.appointment} class="btn btn-appt on-dark">Book an appointment</a>
+    <a href={site.phoneHref} class="btn btn-ghost text-white">Call {site.phone}</a>
+  </Fragment>
+
+  <!-- Overview -->
+  <section class="bg-white py-24 sm:py-28">
+    <div class="mx-auto grid max-w-7xl items-center gap-14 px-5 lg:grid-cols-2">
+      <div>
+        <p class="eyebrow reveal">Overview</p>
+        <h2 class="h-display reveal mt-4" style="--d:80ms">{s.intro.title}</h2>
+        <div class="mt-7 space-y-5">
+          {s.intro.text.map((p, i) => <p class="lead reveal" style={`--d:${140 + i * 80}ms`}>{p}</p>)}
+        </div>
+        <div class="reveal mt-9 flex flex-wrap gap-3" style="--d:300ms">
+          <a href={site.appointment} class="btn btn-solid">Book a visit</a>
+          <a href={site.phoneHref} class="btn btn-ghost">Call {site.phone}</a>
+        </div>
+      </div>
+      <div class="reveal overflow-hidden rounded-3xl shadow-2xl shadow-brand/15" style="--d:160ms">
+        <img src={s.photos[1]} alt={s.photoAlts[1]} loading="lazy" class="aspect-[4/3] h-full w-full object-cover" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Is it right for you -->
+  <section class="relative isolate overflow-hidden bg-abyss px-5 py-24 text-white sm:py-28" style="background-image:radial-gradient(60% 60% at 85% 0%, rgba(36,142,176,.4), transparent 60%)">
+    <div class="mx-auto max-w-7xl">
+      <p class="eyebrow reveal !text-leaf">Is it right for you</p>
+      <h2 class="h-display reveal mt-4 max-w-3xl" style="--d:80ms">{s.candidates.title}</h2>
+      <p class="lead reveal mt-5 max-w-2xl !text-white/75" style="--d:140ms">{s.candidates.text}</p>
+      <div class="mt-12 grid gap-5 md:grid-cols-2">
+        {[['Common causes', s.candidates.conditions], ['Common symptoms', s.candidates.symptoms]].map(([h, list], i) => (
+          <div class="reveal rounded-3xl border border-white/10 bg-white/[.06] p-8 backdrop-blur" style={`--d:${200 + i * 110}ms`}>
+            <h3 class="font-display text-3xl font-semibold text-sky">{h}</h3>
+            <ul class="mt-5 space-y-3">
+              {(list as string[]).map((c) => <li class="flex gap-3 text-white/80"><span class="mt-2.5 h-2 w-2 shrink-0 rounded-full bg-leaf" aria-hidden="true"></span>{c}</li>)}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <LocalSection topic={s.name.replace(/ care$/, '')} />
+
+  <!-- Benefits -->
+  <section class="bg-white py-24 sm:py-28">
+    <div class="mx-auto max-w-7xl px-5">
+      <p class="eyebrow reveal">Benefits</p>
+      <h2 class="h-display reveal mt-4 max-w-3xl" style="--d:80ms">{s.benefits.title}</h2>
+      <p class="lead reveal mt-5 max-w-2xl" style="--d:140ms">{s.benefits.text}</p>
+      <ul class="mt-12 grid gap-px overflow-hidden rounded-3xl border border-slate-200 bg-slate-200 sm:grid-cols-2 lg:grid-cols-4">
+        {s.benefits.items.map((b, i) => (
+          <li class="reveal bg-white p-8" style={`--d:${i * 90}ms`}>
+            <h3 class="font-display text-2xl font-semibold text-brand">{b.t}</h3>
+            <p class="mt-3 leading-relaxed text-slate-600">{b.d}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Recovery -->
+  <section class="bg-mist py-24 sm:py-28">
+    <div class="mx-auto grid max-w-7xl items-start gap-14 px-5 lg:grid-cols-[1fr_1.1fr]">
+      <div class="lg:sticky lg:top-28">
+        <div class="reveal overflow-hidden rounded-3xl shadow-2xl shadow-brand/15">
+          <img src={s.photos[2]} alt={s.photoAlts[2]} loading="lazy" class="aspect-[4/3] w-full object-cover" />
+        </div>
+        <p class="eyebrow reveal mt-10">Your care path</p>
+        <h2 class="h-display reveal mt-4" style="--d:80ms">{s.recovery.title}</h2>
+        <p class="lead reveal mt-5" style="--d:140ms">{s.recovery.text}</p>
+      </div>
+      <ol class="space-y-5">
+        {s.recovery.steps.map((st, i) => (
+          <li class="reveal flex gap-5 rounded-3xl bg-white p-7 shadow-lg shadow-brand/5" style={`--d:${i * 80}ms`}>
+            <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-brand font-display text-lg font-semibold text-white" aria-hidden="true">{i + 1}</span>
+            <div><h3 class="text-xl font-semibold text-ink">{st.t}</h3><p class="mt-1.5 leading-relaxed text-slate-600">{st.d}</p></div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- Safety + FAQ -->
+  <section class="bg-white py-24 sm:py-28">
+    <div class="mx-auto grid max-w-7xl gap-14 px-5 lg:grid-cols-[.8fr_1.2fr]">
+      <div>
+        <p class="eyebrow reveal">Safety</p>
+        <h2 class="h-display reveal mt-4" style="--d:80ms">{s.safety.title}</h2>
+        <div class="mt-6 space-y-4">{s.safety.text.map((t) => <p class="lead reveal">{t}</p>)}</div>
+      </div>
+      <div>
+        <p class="eyebrow reveal">Frequently asked questions</p>
+        <div class="mt-6 divide-y divide-slate-200 border-y border-slate-200">
+          {s.faqs.map((f) => (
+            <details class="group py-5">
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-lg font-semibold text-ink">
+                {f.q}<span class="text-2xl text-brand transition group-open:rotate-45" aria-hidden="true">+</span>
+              </summary>
+              <div class="mt-3 space-y-3 leading-relaxed text-slate-600">{f.a.map((p) => <p>{p}</p>)}</div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Reviews />
+
+  <!-- Other services -->
+  <section class="bg-mist py-20">
+    <div class="mx-auto max-w-7xl px-5">
+      <h2 class="h-display reveal">Other services</h2>
+      <ul class="mt-8 flex flex-wrap gap-3">
+        {others.map((o) => <li><a href={o.href} class="inline-block rounded-full border border-slate-200 bg-white px-5 py-2.5 font-medium text-ink transition hover:border-brand hover:text-brand">{o.t}</a></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <FinalCta />
+</PageLayout>

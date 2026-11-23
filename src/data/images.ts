@@ -59,3 +59,8 @@ export const img = {
   office: ['office-1', 'office-1-1', 'office-3', 'office-4', 'office-5', 'office-6'].map((n) => live(`2026/02/${n}.jpg`)),
   whyUs: '/images/office-1-1.jpg', // your own photo
 };
+
+/** Photos for service pages, three per service: hero, 'is it right for you', recovery. */
+export const servicePhotos = {
+  'back-pain': [ss('back-pain-1'), ss('back-pain-2'), ss('back-pain-3')],
+};
