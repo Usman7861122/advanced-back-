@@ -21,6 +21,7 @@ export const img = {
   athlete: ss('athlete'),         // parallax "Don't Let Pain Control Your Life"
   ctaBig: ss('cta'),       // final "Start Your Journey" photo
   aboutHero: ss('about-hero'),    // About Practice page hero
+  doctorHero: ss('doctor-hero'),  // doctor profile page hero
   svc: {
     back: ss('back'),
     neck: ss('neck'),
