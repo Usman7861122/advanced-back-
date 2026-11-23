@@ -3,6 +3,7 @@ import PageLayout from '../../layouts/PageLayout.astro';
 import LocalSection from '../../components/pages/LocalSection.astro';
 import Reviews from '../../components/sections/Reviews.astro';
 import FinalCta from '../../components/sections/FinalCta.astro';
+import CityText from '../../components/ui/CityText.astro';
 import { services } from '../../data/services';
 import { site } from '../../data/site';
 
@@ -45,7 +46,7 @@ const faqLd = {
     <div class="mx-auto grid max-w-7xl items-center gap-14 px-5 lg:grid-cols-2">
       <div>
         <p class="eyebrow reveal">Overview</p>
-        <h2 class="h-display reveal mt-4" style="--d:80ms">{s.intro.title}</h2>
+        <h2 class="h-display reveal mt-4" style="--d:80ms"><CityText text={s.intro.title} /></h2>
         <div class="mt-7 space-y-5">
           {s.intro.text.map((p, i) => <p class="lead reveal" style={`--d:${140 + i * 80}ms`}>{p}</p>)}
         </div>

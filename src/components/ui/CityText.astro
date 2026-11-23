@@ -1,0 +1,7 @@
+---
+import { localCity } from '../../data/local';
+interface Props { text: string; class?: string; }
+const { text, class: cls = 'text-brand' } = Astro.props;
+const parts = text.split(localCity);
+---
+{parts.map((t, i) => (<>{t}{i < parts.length - 1 && <span class:list={['italic', cls]}>{localCity}</span>}</>))}
