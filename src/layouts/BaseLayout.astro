@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import Header from '../components/islands/Header';
 import Footer from '../components/ui/Footer.astro';
+import CookieBanner from '../components/ui/CookieBanner.astro';
 import SpineProgress from '../components/islands/SpineProgress';
 import { site } from '../data/site';
 
@@ -38,12 +39,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <main id="main"><slot /></main>
     <Footer />
 
-    <!-- Chat widget (same script as the live site) -->
-    <script
-      is:inline
-      src="https://widgets.leadconnectorhq.com/loader.js"
-      data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
-      data-widget-id="6af33435b488c87e6896980c"></script>
+    <CookieBanner />
 
     <!-- scroll reveal -->
     <script is:inline>

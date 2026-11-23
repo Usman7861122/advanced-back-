@@ -1,0 +1,67 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import { legalPages, getLegal } from '../data/legal';
+import { img } from '../data/images';
+
+export function getStaticPaths() {
+  return legalPages.map((p) => ({ params: { legal: p.slug } }));
+}
+
+const page = getLegal(Astro.params.legal as string)!;
+const toc = page.blocks.filter((b) => b.h).map((b) => b.h as string);
+const slugify = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+const others = legalPages.filter((p) => p.slug !== page.slug);
+---
+<PageLayout
+  title={page.seoTitle}
+  heading={page.title}
+  eyebrow="Legal"
+  lede={page.lede}
+  description={page.description}
+  image={img.aboutHero}
+  imageAlt="The friendly team at Advanced Back & Neck Pain Center"
+  position="center 35%"
+  crumbs={[{ label: page.title }]}
+>
+  <section class="bg-white py-16 sm:py-20">
+    <div class="mx-auto grid max-w-7xl gap-12 px-5 lg:grid-cols-[16rem_1fr]">
+      <aside class="lg:sticky lg:top-28 lg:self-start">
+        {toc.length > 1 && (
+          <nav aria-label="On this page">
+            <p class="eyebrow">On this page</p>
+            <ul class="mt-4 grid gap-2 border-l border-slate-200 text-[15px]">
+              {toc.map((t) => <li><a href={`#${slugify(t)}`} class="-ml-px block border-l-2 border-transparent py-1 pl-4 text-slate-600 transition hover:border-brand hover:text-brand">{t}</a></li>)}
+            </ul>
+          </nav>
+        )}
+        <div class="mt-8">
+          <p class="eyebrow">Other policies</p>
+          <ul class="mt-3 grid gap-1.5 text-[15px]">
+            {others.map((o) => <li><a href={`/${o.slug}/`} class="text-slate-600 transition hover:text-brand">{o.title}</a></li>)}
+          </ul>
+        </div>
+      </aside>
+
+      <article class="max-w-3xl">
+        {page.updated && <p class="mb-8 text-sm text-slate-500">Last updated: {page.updated}</p>}
+        {page.blocks.map((b) => (
+          <div class="mb-10">
+            {b.h && <h2 id={slugify(b.h)} class="scroll-mt-28 font-display text-3xl font-semibold leading-tight text-ink">{b.h}</h2>}
+            {b.p && b.p.map((t) => <p class:list={['mt-4 leading-relaxed', b.caps ? 'text-[14px] text-slate-600' : 'text-lg text-slate-700']}>{t}</p>)}
+            {b.ul && (
+              <ul class="mt-4 grid gap-3">
+                {b.ul.map((t) => (
+                  <li class="flex gap-3 leading-relaxed text-slate-700">
+                    <span class="mt-2.5 h-2 w-2 shrink-0 rounded-full bg-leaf"></span><span>{t}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+            {b.cookieButton && <button type="button" data-cookie-settings class="btn btn-solid mt-6">Change cookie settings</button>}
+          </div>
+        ))}
+        <p class="mt-12 rounded-2xl border border-slate-200 bg-mist p-5 text-sm text-slate-600">Questions about this page? Call <a class="font-semibold text-brand" href="tel:302-368-1300">302-368-1300</a>.</p>
+      </article>
+    </div>
+  </section>
+</PageLayout>

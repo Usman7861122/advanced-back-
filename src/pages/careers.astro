@@ -1,0 +1,101 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import FinalCta from '../components/sections/FinalCta.astro';
+import { img } from '../data/images';
+import { site } from '../data/site';
+
+const email = 'drtravismckay@advancedback.com';
+const qualities = [
+  'Proficiency, or desire to be proficient, in manual, full spine adjusting',
+  'Interest, and ideally experience, in CBP technique protocols',
+  'Intelligent, motivated, focused with an ability to multi-task',
+  'Able to effectively interact with a large number of patients per week',
+  'Strong radiology background',
+  'Interest in marketing, both directly to consumers as well as other healthcare professionals and attorneys',
+];
+const offers = [
+  { t: 'Base salary', d: 'Based on your experience.' },
+  { t: 'Monthly bonuses', d: 'Potential bonuses based on collections and practice statistics.' },
+  { t: 'Continuing education', d: 'We pay for it.' },
+  { t: 'Malpractice fees', d: 'We pay them.' },
+  { t: 'Three weeks of vacation', d: 'For your first year.' },
+  { t: 'Training', d: 'We provide any training the right candidate needs.' },
+];
+---
+<PageLayout
+  title="Career Opportunities | Advanced Back & Neck Pain Center"
+  heading="Associate chiropractor wanted"
+  eyebrow="Careers"
+  lede="Join an award-winning, family-owned chiropractic practice in Newark, Delaware. This position is open now."
+  description="Advanced Back & Neck Pain Center in Newark, DE is hiring a full-time Associate Doctor of Chiropractic. See the role, what we look for and how to apply."
+  image={img.aboutHero}
+  imageAlt="The team at Advanced Back & Neck Pain Center"
+  position="center 35%"
+  crumbs={[{ label: 'Careers' }]}
+>
+  <Fragment slot="actions">
+    <a href={`mailto:${email}?subject=Associate%20Chiropractor`} class="btn btn-appt on-dark">Send your CV</a>
+    <a href={site.phoneHref} class="btn btn-ghost text-white">Call {site.phone}</a>
+  </Fragment>
+
+  <section class="bg-white py-20 sm:py-24">
+    <div class="mx-auto grid max-w-7xl gap-12 px-5 lg:grid-cols-[.8fr_1.2fr] lg:gap-16">
+      <div class="lg:sticky lg:top-28 lg:self-start">
+        <p class="eyebrow reveal">The role</p>
+        <h2 class="h-display reveal mt-4" style="--d:80ms">A busy office that needs a second doctor</h2>
+      </div>
+      <div>
+        <p class="lead reveal mb-5">We are an award-winning, family-owned chiropractic practice in Newark, Delaware looking for a full-time Associate Doctor of Chiropractic. Our office has been in business for over 30 years and currently, we have 9 employees, full time and part-time, ranging in roles from office manager, to billing manager, to chiropractic assistant, to massage therapist.</p>
+        <p class="lead reveal mb-5">At the moment though, we only have one primary doctor, performing the roles of primary treating doctor and clinic director. As a result, we are looking to bring on a new associate as quickly as possible.</p>
+        <p class="lead reveal mb-5">While chiropractic is the main treatment focus of our practice, we also offer our patients in office physical therapy, rehab therapy, and massage therapy. We utilize primarily a Diversified, hands-on adjusting style with instrumentation when necessary. Our adjusting and rehab methods are based on Chiropractic BioPhysics (CBP) research and protocols, and we do perform x-rays on the majority of patients using our in-house imaging facilities.</p>
+        <p class="lead reveal">Our office is busy with an office schedule that has 20 hours available for patient time per week. As a result, often the most difficult part of the job of the treating chiropractor is to be able to effectively deliver treatment and guide a patient’s care within time constraints. Our doctors must remain focused during the shift to always be delivering the highest quality care possible.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-mist py-20 sm:py-24">
+    <div class="mx-auto grid max-w-7xl gap-12 px-5 lg:grid-cols-[.8fr_1.2fr] lg:gap-16">
+      <div class="lg:sticky lg:top-28 lg:self-start">
+        <p class="eyebrow reveal">Who we look for</p>
+        <h2 class="h-display reveal mt-4" style="--d:80ms">Qualities of an ideal candidate</h2>
+      </div>
+      <ul class="grid gap-3 sm:grid-cols-2">
+        {qualities.map((q, i) => (
+          <li class="reveal group flex gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition duration-300 hover:-translate-y-1.5 hover:border-brand/40 hover:shadow-lg hover:shadow-brand/15" style={`--d:${(i % 2) * 60}ms`}>
+            <span class="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-leaf transition group-hover:scale-150"></span>
+            <span class="font-semibold leading-snug text-ink">{q}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="bg-white py-20 sm:py-24">
+    <div class="mx-auto grid max-w-7xl gap-12 px-5 lg:grid-cols-[.8fr_1.2fr] lg:gap-16">
+      <div class="lg:sticky lg:top-28 lg:self-start">
+        <p class="eyebrow reveal">What we offer</p>
+        <h2 class="h-display reveal mt-4" style="--d:80ms">Pay, time off and support</h2>
+      </div>
+      <div class="grid gap-4 sm:grid-cols-2">
+        {offers.map((o, i) => (
+          <div class="reveal rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1.5 hover:border-brand/40 hover:shadow-lg hover:shadow-brand/15" style={`--d:${(i % 2) * 60}ms`}>
+            <h3 class="text-lg font-semibold text-ink">{o.t}</h3>
+            <p class="mt-1.5 text-slate-600">{o.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-gradient-to-br from-brand via-deep to-abyss py-20 text-white sm:py-24">
+    <div class="mx-auto max-w-4xl px-5 text-center">
+      <p class="eyebrow reveal !text-leaf">How to apply</p>
+      <h2 class="h-display reveal mt-4" style="--d:80ms">Send your CV to Dr. Travis McKay</h2>
+      <p class="reveal mx-auto mt-6 max-w-2xl text-lg text-white/85" style="--d:140ms">This position is open now and we are looking for an immediate hire. If you have questions about the position, the compensation or the practice, email the same address. We look forward to hearing from you!</p>
+      <div class="reveal mt-9 flex flex-wrap justify-center gap-4" style="--d:220ms">
+        <a href={`mailto:${email}?subject=Associate%20Chiropractor`} class="btn-appt on-dark"><span>{email}</span><span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+  <FinalCta />
+</PageLayout>

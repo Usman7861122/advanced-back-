@@ -1,0 +1,23 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import GetInTouch from '../components/sections/GetInTouch.astro';
+import { img } from '../data/images';
+import { site } from '../data/site';
+---
+<PageLayout
+  title="Contact Our Practice | Advanced Back & Neck Pain Center"
+  heading="Contact us"
+  eyebrow="Newark, DE"
+  lede="Call us, send a message or stop by the office. We will find a time that works for you."
+  description="Reach our clinic in Newark, DE. Find our phone number, office hours, map and a secure message form."
+  image={img.aboutHero}
+  imageAlt="The friendly team at Advanced Back & Neck Pain Center"
+  position="center 35%"
+  crumbs={[{ label: 'Contact Us' }]}
+>
+  <Fragment slot="actions">
+    <a href={site.appointment} class="btn btn-appt on-dark">Book an appointment</a>
+    <a href={site.phoneHref} class="btn btn-ghost text-white">Call {site.phone}</a>
+  </Fragment>
+  <GetInTouch />
+</PageLayout>
