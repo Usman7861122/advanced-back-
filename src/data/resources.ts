@@ -28,7 +28,7 @@ export type ResourcePage = {
 const brand = ' | Advanced Back & Neck Pain Center';
 const R = { label: 'Resources', href: '/resources/' };
 const PC = { label: 'Patient Center', href: '/resources/patient-center/' };
-const doc = (n: number) => `https://advancedback.com/assets/docs/${n}.pdf`;
+const doc = (name: string) => `/forms/${name}.pdf`;
 
 export const resourcePages: ResourcePage[] = [
   {
@@ -262,10 +262,10 @@ export const resourcePages: ResourcePage[] = [
         title: 'Complete them at home',
         text: ['We offer our paperwork online so you can complete it in the convenience of your own home. Here are the essential forms we use and why we need them.'],
         forms: [
-          { title: 'New Patient Insurance Intake Form', href: doc(15203) },
-          { title: 'Auto Accident Patient Intake Form', href: doc(15204) },
-          { title: 'Personal Effects Questionnaire', href: doc(15205) },
-          { title: 'Slip/Fall New Patient Interview Form', href: doc(15206) },
+          { title: 'New Patient Insurance Intake Form', href: doc('new-patient-insurance-intake-form') },
+          { title: 'Auto Accident Patient Intake Form', href: doc('auto-accident-patient-intake-form') },
+          { title: 'Personal Effects Questionnaire', href: doc('personal-effects-questionnaire') },
+          { title: 'Slip/Fall New Patient Interview Form', href: doc('slip-fall-new-patient-interview-form') },
         ],
       },
     ],
