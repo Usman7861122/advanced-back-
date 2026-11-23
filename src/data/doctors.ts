@@ -13,7 +13,6 @@ export type Doctor = {
   story: string[];
   approachTitle: string;
   approach: { t: string; d: string }[];
-  focus: { label: string; href: string }[];
   backgroundTitle: string;
   background: string[];
   interests: string;
@@ -47,11 +46,6 @@ export const doctors: Doctor[] = [
       { t: 'Adjusting', d: 'Hands-on adjustments to help the spine return toward its normal position.' },
       { t: 'Exercise', d: 'Exercises that support your spine between visits.' },
       { t: 'Traction', d: 'Traction to ease pressure on the tissues around the spine.' },
-    ],
-    focus: [
-      { label: 'Neck pain', href: '/services/chiropractor-for-neck-pain/' },
-      { label: 'Back pain', href: '/services/back-pain-chiropractor-in-newark-de/' },
-      { label: 'Headaches', href: '/services/chiropractor-for-headaches-migraines-in-newark-de/' },
     ],
     backgroundTitle: 'My background',
     background: [
