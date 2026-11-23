@@ -34,13 +34,13 @@ const bookingSrc = `https://api.ironhealthsolutions.com/widget/booking/${booking
       </div>
 
       <aside class="grid content-start gap-5">
-        <div class="reveal rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <div class="reveal rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1.5 hover:border-brand/40 hover:shadow-xl hover:shadow-brand/15">
           <h2 class="font-display text-2xl font-semibold text-ink">Prefer to call?</h2>
           <p class="mt-2 text-slate-600">We can often get you in the same day.</p>
           <a href={site.phoneHref} class="btn btn-solid mt-5 w-full justify-center">{site.phone}</a>
         </div>
         <OfficeHours class="reveal" />
-        <div class="reveal rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <div class="reveal rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1.5 hover:border-brand/40 hover:shadow-xl hover:shadow-brand/15">
           <h2 class="font-display text-2xl font-semibold text-ink">Before you come</h2>
           <ul class="mt-4 grid gap-3 text-slate-700">
             <li class="flex gap-3"><span class="mt-2.5 h-2 w-2 shrink-0 rounded-full bg-leaf"></span>A photo ID and your insurance card</li>
