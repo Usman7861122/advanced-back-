@@ -1,8 +1,38 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import PageLayout from '../layouts/PageLayout.astro';
+import FinalCta from '../components/sections/FinalCta.astro';
+import { img } from '../data/images';
+import { site } from '../data/site';
 ---
-<BaseLayout title="Contact | Advanced Back">
-  <section class="mx-auto max-w-3xl px-6 py-20">
-    <h1 class="text-4xl font-bold">Contact</h1>
+<PageLayout
+  title="Contact | Advanced Back & Neck Pain Center"
+  heading="Contact Us"
+  eyebrow="Newark, DE"
+  lede="Call us or visit the office. We will find a time that works for you."
+  description="Contact Advanced Back & Neck Pain Center at 54 Omega Drive, Suite F, Newark, DE. Call 302-368-1300 to book a visit."
+  image={img.doctorHero}
+  imageAlt="A chiropractor talking with a patient about their care"
+  crumbs={[{ label: 'Contact' }]}
+>
+  <section class="bg-white py-24">
+    <div class="mx-auto grid max-w-7xl gap-12 px-5 lg:grid-cols-2">
+      <div>
+        <p class="eyebrow reveal">Visit us</p>
+        <h2 class="h-display reveal mt-4" style="--d:80ms">Advanced Back &amp; Neck Pain Center</h2>
+        <p class="lead reveal mt-6" style="--d:140ms">{site.street} {site.cityLine}</p>
+        <p class="reveal mt-4 text-lg" style="--d:180ms">Phone: <a class="font-semibold text-brand" href={site.phoneHref}>{site.phone}</a><br />Fax: {site.fax}</p>
+        <div class="reveal mt-8 flex flex-wrap gap-3" style="--d:240ms">
+          <a href={site.appointment} class="btn btn-solid">Book a visit</a>
+          <a href={site.mapHref} target="_blank" rel="noopener" class="btn btn-ghost">Get directions</a>
+        </div>
+      </div>
+      <div class="reveal rounded-3xl border border-slate-200 bg-mist p-8" style="--d:160ms">
+        <h3 class="text-sm font-bold uppercase tracking-[.18em] text-brand">Office hours</h3>
+        <ul class="mt-5 divide-y divide-slate-200">
+          {site.hours.map((h) => <li class="flex flex-wrap justify-between gap-x-6 py-3"><span class="font-semibold text-ink">{h.day}</span><span class="text-slate-600">{h.time}</span></li>)}
+        </ul>
+      </div>
+    </div>
   </section>
-</BaseLayout>
+  <FinalCta />
+</PageLayout>

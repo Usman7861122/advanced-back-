@@ -11,14 +11,7 @@ export function getStaticPaths() {
   return services.map((s) => ({ params: { slug: s.slug }, props: { s } }));
 }
 const { s } = Astro.props;
-const others = [
-  { t: 'Back Pain', href: '/services/back-pain-chiropractor-in-newark-de/' },
-  { t: 'Neck Pain', href: '/services/chiropractor-for-neck-pain/' },
-  { t: 'Sciatica', href: '/services/chiropractor-for-sciatica-in-newark-de/' },
-  { t: 'Herniated Disc', href: '/services/herniated-disc-chiropractor-in-newark-de/' },
-  { t: 'Headaches & Migraines', href: '/services/chiropractor-for-headaches-migraines-in-newark-de/' },
-  { t: 'Car Accident', href: '/services/car-accident-chiropractor/' },
-].filter((o) => !o.href.includes(s.slug));
+const others = services.filter((o) => o.slug !== s.slug).map((o) => ({ t: o.name.charAt(0).toUpperCase() + o.name.slice(1), href: `/services/${o.slug}/` }));
 const faqLd = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
@@ -118,10 +111,12 @@ const faqLd = {
   <section class="bg-mist py-24 sm:py-28">
     <div class="mx-auto grid max-w-7xl items-start gap-14 px-5 lg:grid-cols-[1fr_1.1fr]">
       <div class="lg:sticky lg:top-28">
-        <div class="reveal overflow-hidden rounded-3xl shadow-2xl shadow-brand/15">
-          <img src={s.photos[2]} alt={s.photoAlts[2]} loading="lazy" class="aspect-[4/3] w-full object-cover" />
-        </div>
-        <p class="eyebrow reveal mt-10">Your care path</p>
+        {s.photos[2] && (
+          <div class="reveal mb-10 overflow-hidden rounded-3xl shadow-2xl shadow-brand/15">
+            <img src={s.photos[2]} alt={s.photoAlts[2]} loading="lazy" class="aspect-[4/3] w-full object-cover" />
+          </div>
+        )}
+        <p class="eyebrow reveal">Your care path</p>
         <h2 class="h-display reveal mt-4" style="--d:80ms">{s.recovery.title}</h2>
         <p class="lead reveal mt-5" style="--d:140ms">{s.recovery.text}</p>
       </div>

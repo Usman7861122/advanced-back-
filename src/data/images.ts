@@ -63,4 +63,16 @@ export const img = {
 /** Photos for service pages, three per service: hero, 'is it right for you', recovery. */
 export const servicePhotos = {
   'back-pain': [ss('back-pain-1'), ss('back-pain-2'), ss('back-pain-3')],
-};
+  'car-accident': [ss('car-accident-1'), ss('car-accident-2'), ss('car-accident-3')],
+  'headaches': [ss('headaches-1'), ss('headaches-2')],
+  'neck-pain': [ss('neck-pain-1'), ss('neck-pain-2')],
+  'sciatica': [ss('sciatica-1'), ss('sciatica-2')],
+  'herniated-disc': [ss('herniated-disc-1'), ss('herniated-disc-2')],
+  'decompression': [ss('decompression-1'), ss('decompression-2')],
+  'sports-injury': [ss('sports-injury-1'), ss('sports-injury-2')],
+  'shockwave': [ss('shockwave-1'), ss('shockwave-2')],
+  'arthritis': [ss('arthritis-1'), ss('arthritis-2')],
+  'pinched-nerve': [ss('pinched-nerve-1'), ss('pinched-nerve-2')],
+  'work-injuries': [ss('work-injuries-1'), ss('work-injuries-2')],
+  'chiropractic-care': [ss('chiropractic-care-1'), ss('chiropractic-care-2')],
+} as Record<string, string[]>;

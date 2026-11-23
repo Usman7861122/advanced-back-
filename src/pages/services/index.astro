@@ -1,0 +1,60 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import LocalSection from '../../components/pages/LocalSection.astro';
+import Reviews from '../../components/sections/Reviews.astro';
+import FinalCta from '../../components/sections/FinalCta.astro';
+import { services } from '../../data/services';
+import { servicePhotos } from '../../data/images';
+import { site } from '../../data/site';
+---
+<PageLayout
+  title="Chiropractic & Spinal Rehabilitation Services | Advanced Back & Neck Pain Center"
+  heading="Chiropractic & Spinal Care Services in Newark, DE"
+  eyebrow="Our services"
+  lede="Non-surgical care for back, neck and joint pain. Pick the service that matches how you feel, or call us and we will help you choose."
+  description="Explore our full clinical capabilities, spanning state-of-the-art spinal decompression therapy, posture corrections, accident injury tracking, and sciatica relief."
+  image={servicePhotos['chiropractic-care'][0]}
+  imageAlt="A chiropractor gently adjusting a patient’s neck"
+  position="center 35%"
+  crumbs={[{ label: 'Services' }]}
+>
+  <Fragment slot="actions">
+    <a href={site.appointment} class="btn btn-appt on-dark">Book an appointment</a>
+    <a href={site.phoneHref} class="btn btn-ghost text-white">Call {site.phone}</a>
+  </Fragment>
+
+  <section class="relative isolate overflow-hidden bg-mist py-24 sm:py-28">
+    <div class="absolute -right-40 top-10 -z-10 h-[28rem] w-[28rem] rounded-full bg-sky/10 blur-3xl" aria-hidden="true"></div>
+    <div class="mx-auto max-w-7xl px-5">
+      <div class="flex flex-wrap items-end justify-between gap-8">
+        <div class="max-w-2xl">
+          <p class="eyebrow reveal">What we treat</p>
+          <h2 class="h-display reveal mt-4" style="--d:80ms">Care for the way you hurt</h2>
+        </div>
+        <p class="lead reveal max-w-md" style="--d:140ms">Every plan starts with an exam. We explain what we find and the options in simple words.</p>
+      </div>
+
+      <ul class="mt-14 grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
+        {services.map((v, i) => (
+          <li class="reveal" style={`--d:${(i % 3) * 100}ms`}>
+            <a href={`/services/${v.slug}/`} class="group flex h-full flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition duration-300 ease-out hover:-translate-y-2 hover:border-transparent hover:shadow-2xl hover:shadow-brand/20">
+              <span class="relative block aspect-[4/3] overflow-hidden">
+                <img src={v.photos[0]} alt={v.photoAlts[0]} loading="lazy" class="h-full w-full object-cover transition duration-700 ease-out group-hover:scale-105" />
+                <span class="absolute inset-x-0 bottom-0 h-1 origin-left scale-x-0 bg-gradient-to-r from-brand via-sky to-leaf transition duration-500 group-hover:scale-x-100" aria-hidden="true"></span>
+              </span>
+              <span class="flex flex-1 flex-col p-7">
+                <h3 class="font-display text-[1.7rem] font-semibold leading-tight text-ink transition group-hover:text-brand">{v.name.charAt(0).toUpperCase() + v.name.slice(1)}</h3>
+                <p class="mt-3 flex-1 leading-relaxed text-slate-600">{v.blurb}</p>
+                <span class="mt-6 inline-flex items-center gap-2 font-semibold text-brand">Learn more <span class="transition group-hover:translate-x-1.5" aria-hidden="true">→</span></span>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <LocalSection topic="Chiropractic care" />
+  <Reviews />
+  <FinalCta />
+</PageLayout>
