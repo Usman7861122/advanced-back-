@@ -1,0 +1,50 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import FinalCta from '../../components/sections/FinalCta.astro';
+import { resourcePages } from '../../data/resources';
+import { img } from '../../data/images';
+import { site } from '../../data/site';
+
+const extra = [
+  { href: '/blog/', title: 'Blog', card: 'Tips for a healthier spine' },
+  { href: '/testimonials/', title: 'Testimonials', card: 'Stories from our patients' },
+  { href: '/testimonials/video-testimonials/', title: 'Video Testimonials', card: 'Hear it from our patients' },
+];
+const cards = [
+  ...resourcePages.map((p) => ({ href: `/resources/${p.slug}/`, title: p.navLabel, card: p.card })),
+  ...extra,
+];
+---
+<PageLayout
+  title="Patient Resources | Advanced Back & Neck Pain Center"
+  heading="Patient resources"
+  eyebrow="Resources"
+  lede="Everything you need before and after your visit: what to expect, our guarantee, forms, fees and patient stories."
+  description="Patient resources from Advanced Back & Neck Pain Center in Newark, DE: first visit guide, follow-up care, guarantee, financial policy, forms and testimonials."
+  image={img.aboutHero}
+  imageAlt="The friendly team at Advanced Back & Neck Pain Center"
+  position="center 35%"
+  crumbs={[{ label: 'Resources' }]}
+>
+  <Fragment slot="actions">
+    <a href={site.appointment} class="btn btn-appt on-dark">Book an appointment</a>
+    <a href={site.phoneHref} class="btn btn-ghost text-white">Call {site.phone}</a>
+  </Fragment>
+
+  <section class="bg-mist py-24 sm:py-28">
+    <div class="mx-auto max-w-7xl px-5">
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {cards.map((c, i) => (
+          <a href={c.href} class="reveal group flex min-h-[11rem] flex-col justify-between rounded-3xl border border-slate-200 bg-white p-8 shadow-sm transition duration-300 hover:-translate-y-2 hover:border-brand/40 hover:shadow-xl hover:shadow-brand/15" style={`--d:${(i % 3) * 70}ms`}>
+            <div>
+              <h2 class="font-display text-2xl font-semibold text-ink">{c.title}</h2>
+              <p class="mt-2 text-slate-600">{c.card}</p>
+            </div>
+            <span class="mt-6 inline-flex items-center gap-2 font-semibold text-brand">Learn more <span class="transition group-hover:translate-x-1" aria-hidden="true">→</span></span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+  <FinalCta />
+</PageLayout>

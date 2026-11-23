@@ -1,0 +1,43 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import FinalCta from '../../components/sections/FinalCta.astro';
+import { videoStories } from '../../data/resources';
+import { img } from '../../data/images';
+import { site } from '../../data/site';
+---
+<PageLayout
+  title="Video Testimonials | Advanced Back & Neck Pain Center"
+  heading="Video testimonials"
+  eyebrow="Patient stories"
+  lede="Hear from patients who came to our Newark office with back pain, neck pain, sciatica and more."
+  description="Watch patient video testimonials from Advanced Back & Neck Pain Center in Newark, DE. Real stories of low back pain, sciatica, pinched nerve and herniated disc relief."
+  image={img.aboutHero}
+  imageAlt="Patients and staff at Advanced Back & Neck Pain Center"
+  position="center 35%"
+  crumbs={[{ label: 'Testimonials', href: '/testimonials/' }, { label: 'Video Testimonials' }]}
+>
+  <Fragment slot="actions">
+    <a href={site.appointment} class="btn btn-appt on-dark">Book an appointment</a>
+    <a href={site.phoneHref} class="btn btn-ghost text-white">Call {site.phone}</a>
+  </Fragment>
+
+  <section class="bg-mist py-24 sm:py-28">
+    <div class="mx-auto grid max-w-7xl gap-8 px-5 md:grid-cols-2">
+      {videoStories.map((v, i) => (
+        <article class="reveal overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-2 hover:border-brand/40 hover:shadow-xl hover:shadow-brand/15" style={`--d:${(i % 2) * 80}ms`}>
+          <div class="aspect-video bg-abyss">
+            <iframe class="h-full w-full" src={`https://www.youtube-nocookie.com/embed/${v.id}`} title={v.title} loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="p-7">
+            <h2 class="font-display text-2xl font-semibold leading-snug text-ink">{v.title}</h2>
+            <p class="mt-3 leading-relaxed text-slate-600">{v.text}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+    <div class="mx-auto mt-14 max-w-3xl px-5 text-center">
+      <p class="lead reveal">Have pain after a car accident or a fall? Please call our office at <a class="font-semibold text-brand" href={site.phoneHref}>{site.phone}</a>. We can help with no drugs and no surgery.</p>
+    </div>
+  </section>
+  <FinalCta />
+</PageLayout>

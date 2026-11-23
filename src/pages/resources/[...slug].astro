@@ -1,0 +1,121 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import FinalCta from '../../components/sections/FinalCta.astro';
+import { resourcePages, getResource } from '../../data/resources';
+import { img, servicePhotos } from '../../data/images';
+import { site } from '../../data/site';
+
+export function getStaticPaths() {
+  return resourcePages.map((p) => ({ params: { slug: p.slug } }));
+}
+
+const page = getResource(Astro.params.slug as string)!;
+const heroes: Record<string, string> = {
+  doctorHero: img.doctorHero,
+  about: img.aboutHero,
+  care: servicePhotos['chiropractic-care'][1],
+  guarantee: servicePhotos['back-pain'][0],
+  finance: img.ctaBig,
+  offer: img.athlete,
+};
+const others = resourcePages.filter((p) => p.slug !== page.slug);
+---
+<PageLayout
+  title={page.seoTitle}
+  heading={page.heading}
+  eyebrow={page.eyebrow}
+  lede={page.lede}
+  description={page.description}
+  image={heroes[page.image]}
+  imageAlt={page.imageAlt}
+  position="center 35%"
+  crumbs={page.crumbs}
+>
+  <Fragment slot="actions">
+    <a href={site.appointment} class="btn btn-appt on-dark">Book an appointment</a>
+    <a href={site.phoneHref} class="btn btn-ghost text-white">Call {site.phone}</a>
+  </Fragment>
+
+  {page.sections.map((s, i) => (
+    <section class:list={['relative overflow-hidden py-20 sm:py-24', i % 2 === 0 ? 'bg-white' : 'bg-mist']}>
+      <div class="mx-auto grid max-w-7xl gap-10 px-5 lg:grid-cols-[.8fr_1.2fr] lg:gap-16">
+        <div class="lg:sticky lg:top-28 lg:self-start">
+          <p class="eyebrow reveal">{s.eyebrow}</p>
+          <h2 class="h-display reveal mt-4" style="--d:80ms">{s.title}</h2>
+        </div>
+        <div>
+          {s.text && s.text.map((t, j) => <p class="lead reveal mb-5" style={`--d:${100 + j * 60}ms`}>{t}</p>)}
+
+          {s.checklist && (
+            <ul class="mt-6 grid gap-3 sm:grid-cols-2">
+              {s.checklist.map((c) => (
+                <li class="reveal group flex items-center gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition duration-300 hover:-translate-y-1.5 hover:border-brand/40 hover:shadow-lg hover:shadow-brand/15">
+                  <span class="h-2.5 w-2.5 shrink-0 rounded-full bg-leaf transition group-hover:scale-150"></span>
+                  <span class="font-semibold text-ink">{c}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+
+          {s.steps && (
+            <ol class="mt-6 grid gap-4">
+              {s.steps.map((st, k) => (
+                <li class="reveal group flex gap-5 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1.5 hover:border-brand/40 hover:shadow-lg hover:shadow-brand/15" style={`--d:${k * 50}ms`}>
+                  <span class="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-brand font-display text-lg font-semibold text-white transition group-hover:scale-110">{k + 1}</span>
+                  <div>
+                    <h3 class="text-lg font-semibold text-ink">{st.title}</h3>
+                    <p class="mt-1.5 leading-relaxed text-slate-600">{st.text}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          )}
+
+          {s.cards && (
+            <div class="mt-6 grid gap-5">
+              {s.cards.map((c) => (
+                <a href={c.href} class="reveal group block rounded-2xl border border-slate-200 bg-white p-7 shadow-sm transition duration-300 hover:-translate-y-1.5 hover:border-brand/40 hover:shadow-xl hover:shadow-brand/15">
+                  <h3 class="font-display text-2xl font-semibold text-ink">{c.title}</h3>
+                  <p class="mt-2 leading-relaxed text-slate-600">{c.text}</p>
+                  <span class="mt-4 inline-flex items-center gap-2 font-semibold text-brand">{c.cta} <span class="transition group-hover:translate-x-1" aria-hidden="true">→</span></span>
+                </a>
+              ))}
+            </div>
+          )}
+
+          {s.forms && (
+            <ul class="mt-6 grid gap-4">
+              {s.forms.map((f) => (
+                <li>
+                  <a href={f.href} target="_blank" rel="noopener" class="reveal group flex items-center justify-between gap-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1.5 hover:border-brand/40 hover:shadow-xl hover:shadow-brand/15">
+                    <span class="flex items-center gap-4">
+                      <span class="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-mist text-brand">
+                        <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>
+                      </span>
+                      <span class="font-semibold text-ink">{f.title}</span>
+                    </span>
+                    <span class="inline-flex shrink-0 items-center gap-2 text-sm font-semibold text-brand">Download PDF <span class="transition group-hover:translate-y-0.5" aria-hidden="true">↓</span></span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <section class="bg-white pb-20 sm:pb-24">
+    <div class="mx-auto max-w-7xl px-5">
+      <p class="eyebrow reveal">More for patients</p>
+      <div class="mt-5 flex flex-wrap gap-3">
+        {others.map((o) => (
+          <a href={`/resources/${o.slug}/`} class="reveal rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-ink shadow-sm transition duration-300 hover:-translate-y-1 hover:border-brand/40 hover:text-brand hover:shadow-md">{o.navLabel}</a>
+        ))}
+        <a href="/testimonials/" class="reveal rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-ink shadow-sm transition duration-300 hover:-translate-y-1 hover:border-brand/40 hover:text-brand hover:shadow-md">Testimonials</a>
+      </div>
+    </div>
+  </section>
+
+  <FinalCta />
+</PageLayout>
