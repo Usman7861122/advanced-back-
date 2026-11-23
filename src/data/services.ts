@@ -14,7 +14,7 @@ export type Service = {
   photoAlts: [string, string, string];
   intro: { title: string; text: string[] };
   candidates: { title: string; text: string; conditions: string[]; symptoms: string[] };
-  benefits: { title: string; text: string; items: { t: string; d: string }[] };
+  benefits: { title: string; text: string; items: { t: string; d: string; icon: 'move' | 'relief' | 'strong' | 'shield' }[] };
   recovery: { title: string; text: string; steps: { t: string; d: string }[] };
   safety: { title: string; text: string[] };
   faqs: { q: string; a: string[] }[];
@@ -53,10 +53,10 @@ export const services: Service[] = [
       title: 'What care can do for you',
       text: 'Every plan is built from your exam. Here is what we work toward.',
       items: [
-        { t: 'Better movement', d: 'Adjustments help stiff joints move the way they should.' },
-        { t: 'Less pain and tension', d: 'When joints move well, muscles can relax and irritated nerves get relief.' },
-        { t: 'A stronger spine', d: 'Stretching and strengthening exercises help keep your spine steady.' },
-        { t: 'Fewer repeat flare-ups', d: 'We treat the cause so the pain is less likely to return.' },
+        { icon: 'move', t: 'Better movement', d: 'Adjustments help stiff joints move the way they should.' },
+        { icon: 'relief', t: 'Less pain and tension', d: 'When joints move well, muscles can relax and irritated nerves get relief.' },
+        { icon: 'strong', t: 'A stronger spine', d: 'Stretching and strengthening exercises help keep your spine steady.' },
+        { icon: 'shield', t: 'Fewer repeat flare-ups', d: 'We treat the cause so the pain is less likely to return.' },
       ],
     },
     recovery: {
