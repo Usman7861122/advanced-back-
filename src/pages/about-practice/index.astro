@@ -1,0 +1,93 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import LocalSection from '../../components/pages/LocalSection.astro';
+import Doctors from '../../components/sections/Doctors.astro';
+import Awards from '../../components/sections/Awards.astro';
+import Gallery from '../../components/sections/Gallery.astro';
+import Reviews from '../../components/sections/Reviews.astro';
+import FinalCta from '../../components/sections/FinalCta.astro';
+import { img } from '../../data/images';
+import { site } from '../../data/site';
+
+const steps = [
+  { t: 'We find the cause', d: 'Your doctor looks for the real source of your pain, not only where it hurts.' },
+  { t: 'We explain it simply', d: 'You hear what is going on in words that are easy to understand.' },
+  { t: 'You choose your care', d: 'We describe every treatment option in detail, so you pick the path that fits you.' },
+];
+const facts = [
+  { big: '1986', small: 'Serving Newark, Delaware with complete body care' },
+  { big: 'Best', small: 'Named Best Chiropractor in Delaware for more than a decade' },
+  { big: 'Omega', small: 'Inside the Omega Professional Center, next to other medical professionals' },
+];
+---
+<PageLayout
+  title="About Our Practice | Advanced Back & Neck Pain Center"
+  heading="About Our Practice"
+  eyebrow="Chiropractors in Newark, DE"
+  lede="Expert, patient-centered chiropractic care focused on relieving pain, restoring mobility and improving long-term spinal health."
+  description="Advanced Back & Neck Pain Center has provided chiropractic care in Newark, Delaware since 1986. Meet our doctors and see how we care for you."
+  image={img.aboutHero}
+  imageAlt="A chiropractor gently adjusting a patient’s back in a bright treatment room"
+  crumbs={[{ label: 'About Practice' }]}
+>
+  <Fragment slot="actions">
+    <a href={site.appointment} class="btn-appt on-dark"><span>Request Appointment</span><span class="arrow" aria-hidden="true">→</span></a>
+    <a href={site.phoneHref} class="btn btn-ghost text-white">Call {site.phone}</a>
+  </Fragment>
+
+  <!-- Overview -->
+  <section class="relative overflow-hidden bg-white py-24 sm:py-32">
+    <div class="mx-auto grid max-w-7xl items-center gap-16 px-5 lg:grid-cols-2">
+      <div>
+        <p class="eyebrow reveal">Our practice</p>
+        <h2 class="h-display reveal mt-4" style="--d:80ms">Complete body care in Newark since 1986</h2>
+        <p class="lead reveal mt-6" style="--d:160ms">Advanced Back &amp; Neck Pain Center provides chiropractic care to patients in Newark, Delaware. Our office is inside the Omega Professional Center, surrounded by other medical professionals.</p>
+        <p class="lead reveal mt-5" style="--d:220ms">Our doctors treat each patient’s problem with individual care and real concern. We believe you should understand your own health, so we take the time to explain it.</p>
+        <div class="reveal mt-9 flex flex-wrap gap-4" style="--d:300ms">
+          <a href={site.appointment} class="btn btn-solid">Book a Visit <span class="arrow" aria-hidden="true">→</span></a>
+          <a href={site.phoneHref} class="btn btn-ghost text-ink">Call {site.phone}</a>
+        </div>
+      </div>
+      <div class="reveal relative" style="--d:200ms">
+        <div class="absolute -inset-4 -z-10 rounded-[2rem] bg-gradient-to-br from-sky/30 to-leaf/30 blur-2xl"></div>
+        <img src={img.whyUs} alt="Inside the Advanced Back & Neck Pain Center office in Newark, DE" class="sq shadow-2xl shadow-abyss/20" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <!-- How we care (a real sequence) -->
+  <section class="relative isolate overflow-hidden bg-abyss px-5 py-24 text-white sm:py-28" style="background-image:radial-gradient(60% 60% at 85% 0%, rgba(36,142,176,.4), transparent 60%)">
+    <div class="mx-auto max-w-7xl">
+      <p class="eyebrow reveal !text-leaf">How we care for you</p>
+      <h2 class="h-display reveal mt-4 max-w-3xl" style="--d:80ms">You stay in charge of your care</h2>
+      <ol class="mt-14 grid gap-5 md:grid-cols-3">
+        {steps.map((s, i) => (
+          <li class="reveal rounded-3xl border border-white/10 bg-white/[.06] p-8 backdrop-blur transition duration-300 hover:-translate-y-1.5 hover:border-sky/50" style={`--d:${160 + i * 110}ms`}>
+            <span class="font-display text-5xl font-semibold text-sky">{i + 1}</span>
+            <h3 class="mt-4 text-xl font-bold">{s.t}</h3>
+            <p class="mt-2 leading-relaxed text-white/75">{s.d}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- Legacy band -->
+  <section class="bg-mist py-20">
+    <div class="mx-auto grid max-w-7xl gap-5 px-5 md:grid-cols-3">
+      {facts.map((f, i) => (
+        <div class="reveal rounded-3xl bg-white p-8 shadow-lg shadow-brand/5" style={`--d:${i * 100}ms`}>
+          <div class="font-display text-6xl font-semibold text-brand">{f.big}</div>
+          <p class="mt-2 leading-relaxed text-slate-600">{f.small}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <Doctors />
+  <Awards />
+  <LocalSection topic="Chiropractic care" />
+  <Gallery />
+  <Reviews />
+  <FinalCta />
+</PageLayout>

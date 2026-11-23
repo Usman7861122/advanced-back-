@@ -20,6 +20,7 @@ export const img = {
   // Shutterstock (licensed, standard licence)
   athlete: ss('athlete'),         // parallax "Don't Let Pain Control Your Life"
   ctaBig: ss('cta'),       // final "Start Your Journey" photo
+  aboutHero: ss('about-hero'),    // About Practice page hero
   svc: {
     back: ss('back'),
     neck: ss('neck'),
