@@ -10,10 +10,27 @@ export function getStaticPaths() {
 const post = getPost(Astro.params.post as string)!;
 const fmt = (d: string) => new Date(d + 'T12:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 const more = posts.filter((p) => p.slug !== post.slug).slice(0, 3);
+const origin = (Astro.site ?? new URL('https://advancedback.com')).origin;
+const url = `${origin}/${post.slug}/`;
+const imageUrl = origin + post.image;
+const ld = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+  headline: post.title.slice(0, 110),
+  description: post.excerpt,
+  image: [imageUrl],
+  datePublished: post.date,
+  dateModified: post.date,
+  author: { '@type': 'Organization', name: 'Advanced Back & Neck Pain Center', url: origin + '/' },
+  publisher: { '@type': 'Organization', name: 'Advanced Back & Neck Pain Center', logo: { '@type': 'ImageObject', url: origin + '/images/logo-e1772010222317.png' } },
+};
 const short = post.title.length > 48 ? post.title.slice(0, 48).replace(/\s+\S*$/, '') + '…' : post.title;
 ---
 <PageLayout
-  title={`${post.title} | Advanced Back & Neck Pain Center`}
+  title={post.title.length > 52 ? post.title : `${post.title} | Advanced Back & Neck Pain Center`}
+  type="article"
+  published={post.date}
   heading={post.title}
   eyebrow={fmt(post.date)}
   lede={`${post.minutes} min read`}
@@ -23,6 +40,7 @@ const short = post.title.length > 48 ? post.title.slice(0, 48).replace(/\s+\S*$/
   position="center"
   crumbs={[{ label: 'Blog', href: '/blog/' }, { label: short }]}
 >
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(ld)} />
   <article class="bg-white py-16 sm:py-20">
     <div class="mx-auto max-w-3xl px-5">
       <div class:list={['mb-10 overflow-hidden rounded-2xl', post.contain ? 'bg-mist p-6' : '']}>
