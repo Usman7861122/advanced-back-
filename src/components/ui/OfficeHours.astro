@@ -20,9 +20,9 @@ const rows = site.hours.map((h) => {
           {r.day}
           <em data-today-tag hidden class="rounded-full bg-brand px-2 py-0.5 text-[10.5px] font-semibold not-italic uppercase tracking-wide text-white">Today</em>
         </span>
-        <span class:list={['text-right leading-snug', r.closed ? 'text-slate-400' : 'text-slate-600']}>
+        <span class:list={['text-right leading-snug', r.closed ? 'text-slate-500' : 'text-slate-600']}>
           {r.slots.map((s) => <span class="block whitespace-nowrap">{s}</span>)}
-          {r.note && <span class="mt-0.5 block text-[12.5px] text-slate-400">{r.note}</span>}
+          {r.note && <span class="mt-0.5 block text-[12.5px] text-slate-500">{r.note}</span>}
         </span>
       </li>
     ))}

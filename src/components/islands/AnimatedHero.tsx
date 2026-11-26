@@ -29,11 +29,9 @@ export default function AnimatedHero() {
       </motion.p>
 
       <h1 className="mt-5 max-w-6xl font-display text-[clamp(2.5rem,5.4vw,5.2rem)] font-semibold leading-[0.95] tracking-tight">
-        <motion.span initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.2 }} className="block">
-          Advanced Chiropractic Care That
-        </motion.span>
+        <span className="block">Advanced Chiropractic Care That</span>
         <span className="relative mt-2 block h-[1.35em] overflow-hidden text-sky" aria-live="polite">
-          <AnimatePresence mode="wait">
+          <AnimatePresence mode="wait" initial={false}>
             <motion.span
               key={w.t}
               className="absolute left-0 top-0 whitespace-nowrap"

@@ -9,6 +9,35 @@ export function getStaticPaths() {
 }
 const post = getPost(Astro.params.post as string)!;
 const fmt = (d: string) => new Date(d + 'T12:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+const S = '/services/';
+const L = {
+  sciatica: { label: 'Sciatica relief in Newark, DE', href: S + 'chiropractor-for-sciatica-in-newark-de/' },
+  decompression: { label: 'Spinal decompression therapy in Newark, DE', href: S + 'spinal-decompression-therapy-in-newark-de/' },
+  herniated: { label: 'Herniated disc care in Newark, DE', href: S + 'herniated-disc-chiropractor-in-newark-de/' },
+  back: { label: 'Back pain treatment in Newark, DE', href: S + 'back-pain-chiropractor-in-newark-de/' },
+  neck: { label: 'Neck pain relief in Newark, DE', href: S + 'chiropractor-for-neck-pain/' },
+  car: { label: 'Car accident chiropractor in Newark, DE', href: S + 'car-accident-chiropractor/' },
+  headache: { label: 'Headache and migraine care in Newark, DE', href: S + 'chiropractor-for-headaches-migraines-in-newark-de/' },
+  shockwave: { label: 'Shockwave therapy in Newark, DE', href: S + 'shockwave-therapy-in-newark-de/' },
+  arthritis: { label: 'Arthritis pain care in Newark, DE', href: S + 'arthritis-pain-chiropractor-in-newark-de/' },
+};
+const relatedBySlug: Record<string, (keyof typeof L)[]> = {
+  'sharp-lower-back-pain-radiating-down-your-leg-in-newark-de-heres-what-it-means-and-how-to-fix-it': ['sciatica', 'decompression', 'herniated'],
+  'non-surgical-herniated-disc-treatment-in-newark-de-real-pain-relief-without-surgery': ['decompression', 'sciatica', 'herniated'],
+  'the-role-of-chiropractic-care-in-treating-lumbar-disc-herniations': ['decompression', 'herniated', 'sciatica'],
+  'can-chiropractic-care-help-degenerative-disc-disease-new-research-on-neck-pain-and-spinal-disc-health': ['decompression', 'neck', 'herniated'],
+  'the-psoas-muscle-low-back-pain-a-common-but-often-overlooked-connection': ['back', 'sciatica', 'decompression'],
+  'posture-correction-for-desk-workers-in-newark-de-erase-neck-shoulder-and-back-pain': ['neck', 'back', 'decompression'],
+  'top-10-signs-you-have-whiplash': ['car', 'neck', 'headache'],
+  'is-cracking-your-own-neck-dangerous-what-research-says-about-neck-pain-and-chiropractic-care': ['neck', 'headache'],
+  'the-benefits-of-shockwave-therapy-for-musculoskeletal-pain-in-newark-de': ['shockwave', 'back', 'sciatica'],
+  'understanding-headaches-types-causes-and-how-chiropractic-care-can-help': ['headache', 'neck'],
+  'newark-chiropractor-can-help-with-migraines-headaches': ['headache', 'neck'],
+  'newark-chiropractic-care-can-help-arthritis-pain': ['arthritis', 'back'],
+  'what-is-a-neck-hump-and-how-to-get-rid-of-it': ['neck', 'back'],
+  'newark-chiropractor-talks-chiropractic-and-a-sedentary-lifestyle': ['back', 'neck', 'decompression'],
+};
+const related = (relatedBySlug[post.slug] ?? ['back', 'neck']).map((k) => L[k]);
 const more = posts.filter((p) => p.slug !== post.slug).slice(0, 3);
 const origin = (Astro.site ?? new URL('https://advancedback.com')).origin;
 const url = `${origin}/${post.slug}/`;
@@ -47,7 +76,13 @@ const short = post.title.length > 48 ? post.title.slice(0, 48).replace(/\s+\S*$/
         <img src={post.image} alt={post.imageAlt} class:list={['mx-auto w-full', post.contain ? 'max-h-[28rem] object-contain' : 'rounded-2xl']} />
       </div>
       <div class="post-body" set:html={post.html} />
-      <div class="mt-12 flex flex-wrap gap-3 rounded-2xl border border-slate-200 bg-mist p-6">
+      <aside class="mt-12 rounded-2xl border border-slate-200 bg-white p-6">
+        <h2 class="font-display text-2xl font-semibold text-ink">Related care at our Newark office</h2>
+        <ul class="mt-4 grid gap-2">
+          {related.map((r) => <li><a href={r.href} class="font-semibold text-brand underline-offset-4 hover:underline">{r.label} →</a></li>)}
+        </ul>
+      </aside>
+      <div class="mt-6 flex flex-wrap gap-3 rounded-2xl border border-slate-200 bg-mist p-6">
         <a href={site.appointment} class="btn btn-solid">Book an appointment</a>
         <a href={site.phoneHref} class="btn btn-ghost">Call {site.phone}</a>
       </div>
@@ -80,6 +115,6 @@ const short = post.title.length > 48 ? post.title.slice(0, 48).replace(/\s+\S*$/
   .post-body ul, .post-body ol { margin-top: 1rem; padding-left: 1.4rem; list-style: disc; }
   .post-body ol { list-style: decimal; }
   .post-body li { margin-top: .45rem; padding-left: .25rem; }
-  .post-body a { color: #248eb0; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+  .post-body a { color: #0f6280; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
   .post-body hr { margin: 2rem 0; border-color: #e2e8f0; }
 </style>

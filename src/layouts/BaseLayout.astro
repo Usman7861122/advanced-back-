@@ -6,9 +6,15 @@ import CookieBanner from '../components/ui/CookieBanner.astro';
 import SpineProgress from '../components/islands/SpineProgress';
 import { site } from '../data/site';
 import { img } from '../data/images';
+import { seoOverrides } from '../data/seo';
+import fontSans from '../../node_modules/@fontsource-variable/albert-sans/files/albert-sans-latin-wght-normal.woff2?url';
+import fontDisplay from '../../node_modules/@fontsource-variable/cormorant/files/cormorant-latin-wght-normal.woff2?url';
 
 interface Props { title?: string; description?: string; image?: string; type?: 'website' | 'article'; noindex?: boolean; published?: string; home?: boolean; }
-const { title = `${site.name} | Chiropractic Care`, description = site.description, image = img.heroPoster, type = 'website', noindex = false, published, home = false } = Astro.props;
+const { title: rawTitle = `${site.name} | Chiropractic Care`, description: rawDescription = site.description, image = img.heroPoster, type = 'website', noindex = false, published, home = false } = Astro.props;
+const seo = seoOverrides[Astro.url.pathname];
+const title = seo?.title ?? rawTitle;
+const description = seo?.description ?? rawDescription;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const origin = (Astro.site ?? new URL('https://advancedback.com')).origin;
 const absolute = (u: string) => (u.startsWith('http') ? u : origin + (u.startsWith('/') ? u : '/' + u));
@@ -36,6 +42,8 @@ const org = {
       priceRange: '$$',
       address: { '@type': 'PostalAddress', streetAddress: '54 Omega Drive, Suite F', addressLocality: 'Newark', addressRegion: 'DE', postalCode: '19713', addressCountry: 'US' },
       hasMap: site.mapHref,
+      // Approximate point for the Omega Professional Center. Confirm against the Google Business Profile pin.
+      geo: { '@type': 'GeoCoordinates', latitude: 39.690992, longitude: -75.675653 },
       areaServed: ['Newark, DE', 'Wilmington, DE', 'Pike Creek, DE', 'Elkton, MD'],
       openingHoursSpecification: openingHours,
       foundingDate: '1986',
@@ -71,12 +79,8 @@ const org = {
     <meta name="twitter:image" content={ogImage} />
     {home && <script type="application/ld+json" set:html={JSON.stringify(org)} />}
     <slot name="head" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@300..800&family=Cormorant:ital,wght@0,400..700;1,400..700&family=Fraunces:ital,wght@1,600&family=Pinyon+Script&family=Playfair+Display:ital,wght@1,500&family=Roboto+Slab:wght@400..600&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preload" as="font" type="font/woff2" href={fontSans} crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href={fontDisplay} crossorigin />
   </head>
   <body>
     <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-white focus:px-4 focus:py-2">Skip to content</a>

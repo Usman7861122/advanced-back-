@@ -14,7 +14,9 @@ export const unsplash = (id: string, w = 1200, h?: number) =>
 
 export const img = {
   logo: '/images/logo-clear.png',
-  heroVideo: VIDEO_LOCAL ? '/video/hero.m4v' : 'https://d216ujrdi95jbi.cloudfront.net/Travis+Mckay+(1).m4v',
+  heroVideo: '/video/hero-4beef95b.mp4',
+  heroVideoWebm: '/video/hero-913454f2.webm',
+  heroVideoPoster: '/images/hero-poster-2babbb06.webp',
   heroPoster: live('2026/02/2150433205-e1772008394103.jpg'),
 
   // Shutterstock (licensed, standard licence)

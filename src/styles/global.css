@@ -1,9 +1,10 @@
 @import "tailwindcss";
+@import "./fonts.css";
 
 @theme {
   --color-abyss: #06202d;
   --color-deep: #0b3447;
-  --color-brand: #248eb0;
+  --color-brand: #0f6280;
   --color-sky: #20b1e0;
   --color-leaf: #7acf45;
   --color-mist: #eef6f8;
@@ -67,6 +68,7 @@ body { @apply bg-white text-ink font-sans antialiased; overflow-x: hidden; }
 }
 .btn:hover { transform: translateY(-2px); }
 .btn-ghost { border: 1.5px solid currentColor; }
+.btn-ghost.text-white { background: rgba(6, 32, 45, .4); }
 .btn-ghost:hover { background: #fff; color: var(--color-abyss); border-color: #fff; }
 .btn-solid { background: var(--color-brand); color: #fff; }
 .btn-solid:hover { background: var(--color-abyss); }

@@ -12,12 +12,13 @@ const facts = [
   <video
     id="hero-video"
     class="absolute inset-0 -z-20 h-full w-full origin-center scale-[1.07] object-cover"
-    style="opacity:0;transition:opacity 1.4s ease"
-    autoplay muted loop playsinline preload="auto" disablepictureinpicture
+    muted loop playsinline preload="none" disablepictureinpicture
+    poster={img.heroVideoPoster}
+    width="1280" height="676"
     aria-hidden="true"
-  >
-    <source src={img.heroVideo} type="video/mp4" />
-  </video>
+    data-webm={img.heroVideoWebm}
+    data-mp4={img.heroVideo}
+  ></video>
   <div class="absolute inset-0 -z-10 bg-abyss/40"></div>
   <div class="absolute inset-x-0 bottom-0 -z-10 h-40 bg-gradient-to-t from-abyss/70 to-transparent"></div>
 
@@ -36,12 +37,19 @@ const facts = [
 </section>
 
 <script is:inline>
+  // Poster shows right away. The video loads only after the page has loaded, and never on phones or data-saver.
   (function () {
     var v = document.getElementById('hero-video');
     if (!v) return;
-    var show = function () { v.style.opacity = '1'; };
-    v.addEventListener('playing', show);
-    v.addEventListener('canplay', function () { v.play().catch(function () {}); });
-    if (v.readyState > 2) { show(); v.play().catch(function () {}); }
+    var start = function () {
+      var c = navigator.connection || {};
+      if (window.innerWidth < 768 || c.saveData || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var webm = v.canPlayType('video/webm; codecs="vp9"');
+      v.src = webm ? v.dataset.webm : v.dataset.mp4;
+      v.preload = 'auto';
+      v.play().catch(function () {});
+    };
+    var idle = function () { (window.requestIdleCallback || function (f) { setTimeout(f, 800); })(start); };
+    if (document.readyState === 'complete') idle(); else window.addEventListener('load', idle);
   })();
 </script>

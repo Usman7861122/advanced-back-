@@ -18,9 +18,12 @@ const person = {
   name: d.name,
   medicalSpecialty: 'Chiropractic',
   jobTitle: d.role,
+  description: d.description,
+  address: { '@type': 'PostalAddress', streetAddress: '54 Omega Drive, Suite F', addressLocality: 'Newark', addressRegion: 'DE', postalCode: '19713', addressCountry: 'US' },
+  telephone: '+1-302-368-1300',
   url,
   image: new URL(d.portrait, Astro.site).href,
-  worksFor: { '@type': 'MedicalBusiness', name: site.name, telephone: site.phone, address: { '@type': 'PostalAddress', streetAddress: '54 Omega Drive, Suite F', addressLocality: 'Newark', addressRegion: 'DE', postalCode: '19713', addressCountry: 'US' } },
+  worksFor: { '@type': 'MedicalBusiness', '@id': `${Astro.site?.origin}/#practice`, url: `${Astro.site?.origin}/`, name: site.name, telephone: site.phone, address: { '@type': 'PostalAddress', streetAddress: '54 Omega Drive, Suite F', addressLocality: 'Newark', addressRegion: 'DE', postalCode: '19713', addressCountry: 'US' } },
 };
 ---
 <PageLayout

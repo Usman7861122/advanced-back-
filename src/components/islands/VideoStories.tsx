@@ -39,7 +39,7 @@ export default function VideoStories({ videos }: { videos: Video[] }) {
                 className="group absolute inset-0"
                 aria-label={`Play video: ${v.title}`}
               >
-                <img src={thumb(v.id)} alt="" className="h-full w-full scale-105 object-cover transition duration-700 group-hover:scale-110" />
+                <img src={thumb(v.id)} alt="" width="480" height="360" className="h-full w-full scale-105 object-cover transition duration-700 group-hover:scale-110" />
                 <span className="absolute inset-0 bg-gradient-to-t from-abyss/80 to-transparent" />
                 <span className="absolute inset-0 grid place-items-center"><Play big /></span>
                 <span className="absolute bottom-5 left-6 right-6 text-left font-display text-3xl font-semibold text-white sm:text-4xl">{v.title}</span>
@@ -60,7 +60,7 @@ export default function VideoStories({ videos }: { videos: Video[] }) {
             aria-label={`Select video: ${vid.title}`}
             aria-pressed={i === active}
           >
-            <img src={thumb(vid.id)} alt="" className="h-full w-full object-cover transition duration-500 group-hover:scale-110" loading="lazy" />
+            <img src={thumb(vid.id)} alt="" width="480" height="360" className="h-full w-full object-cover transition duration-500 group-hover:scale-110" loading="lazy" />
             <span className={`absolute inset-0 transition ${i === active ? 'bg-sky/20' : 'bg-abyss/40 group-hover:bg-abyss/10'}`} />
             <span className="absolute inset-0 grid place-items-center"><Play /></span>
           </button>
