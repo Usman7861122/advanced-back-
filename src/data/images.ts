@@ -13,7 +13,7 @@ export const unsplash = (id: string, w = 1200, h?: number) =>
   `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&q=75&w=${w}${h ? `&h=${h}` : ''}`;
 
 export const img = {
-  logo: '/images/logo-e1772010222317.png',
+  logo: '/images/logo-clear.png',
   heroVideo: VIDEO_LOCAL ? '/video/hero.m4v' : 'https://d216ujrdi95jbi.cloudfront.net/Travis+Mckay+(1).m4v',
   heroPoster: live('2026/02/2150433205-e1772008394103.jpg'),
 
